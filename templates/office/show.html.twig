@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Office{% endblock %}
+
+{% block body %}
+    <h1>Office</h1>
+
+    <table class="table" style="background: whitesmoke">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ office.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ office.title }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ office.date ? office.date|date('D F Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Heure</th>
+                <td>{{ office.hour ? office.hour|date('G:i') : '' }}</td>
+            </tr>
+            <tr>
+                <th>MaxSub</th>
+                <td>{{ office.maxSub }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn input100" style="background: whitesmoke; width: auto; margin-right: 5px; font-size: large" ><a href="{{ path('office_admin', {'admin':admin }) }}">Revenir aux offices</a></button>
+
+    <button class="btn input100" style="background: whitesmoke; width: auto; margin-right: 5px; font-size: large"><a href="{{ path('office_edit', {'id': office.id, 'admin':admin }) }}">Modifer</a></button>
+
+    <button class="btn input100" style="background: whitesmoke; width: auto; margin-right: 5px; font-size: large"><a href="{{ path('office_delete', {'id': office.id, 'admin':admin }) }}">Supprimer</a></button>
+
+{% endblock %}

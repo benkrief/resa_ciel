@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OfficeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,19 +25,32 @@ class Office
     private $title;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $dateStart;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $dateEnd;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $maxSub;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date;
+
+    /**
+     * @ORM\Column(type="time")
+     */
+    private $hour;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Sub::class, mappedBy="idOffice")
+     */
+    private $subs;
+
+    public function __construct()
+    {
+        $this->subs = new ArrayCollection();
+    }
+
+
+
 
     public function getId(): ?int
     {
@@ -54,29 +69,7 @@ class Office
         return $this;
     }
 
-    public function getDateStart(): ?\DateTimeInterface
-    {
-        return $this->dateStart;
-    }
 
-    public function setDateStart(\DateTimeInterface $dateStart): self
-    {
-        $this->dateStart = $dateStart;
-
-        return $this;
-    }
-
-    public function getDateEnd(): ?\DateTimeInterface
-    {
-        return $this->dateEnd;
-    }
-
-    public function setDateEnd(?\DateTimeInterface $dateEnd): self
-    {
-        $this->dateEnd = $dateEnd;
-
-        return $this;
-    }
 
     public function getMaxSub(): ?int
     {
@@ -86,6 +79,61 @@ class Office
     public function setMaxSub(int $maxSub): self
     {
         $this->maxSub = $maxSub;
+
+        return $this;
+    }
+
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getHour(): ?\DateTimeInterface
+    {
+        return $this->hour;
+    }
+
+    public function setHour(\DateTimeInterface $hour): self
+    {
+        $this->hour = $hour;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Sub[]
+     */
+    public function getSubs(): Collection
+    {
+        return $this->subs;
+    }
+
+    public function addSub(Sub $sub): self
+    {
+        if (!$this->subs->contains($sub)) {
+            $this->subs[] = $sub;
+            $sub->setIdOffice($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSub(Sub $sub): self
+    {
+        if ($this->subs->removeElement($sub)) {
+            // set the owning side to null (unless already changed)
+            if ($sub->getIdOffice() === $this) {
+                $sub->setIdOffice(null);
+            }
+        }
 
         return $this;
     }

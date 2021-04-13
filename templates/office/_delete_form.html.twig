@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('office_delete', {'id': office.id, 'admin':admin}) }}"
+      onsubmit="return confirm('Confirmer la suppresion ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ office.id) }}">
+    <button class="btn input100" style="background: whitesmoke; width: auto; margin-right: 5px" >Supprimer</button>
+
+</form>

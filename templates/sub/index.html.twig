@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Reservation {% endblock %}
+
+{% block body %}
+    <div id="sub">
+        <h2 class="input100" id="inscr">Reservations</h2>
+        <br><br>
+        <div class="limiter">
+            <div class="container-table100">
+                <div class="wrap-table100">
+                    <div class="table100">
+                        <br>
+                        <form method="post" action="{{ path('sub_confirm',{'subs': subs }) }}">
+                        {% for key,nb in subs %}
+                            <table class="table" style="background: whitesmoke">
+                                <thead>
+                                <tr class="table100-head">
+                                    <th class="column1">Office</th>
+                                    <th class="column2"><label>Nom</label></th>
+                                    <th class="column3"><label>Prénom</label></th>
+                                    <th class="column4"><label>Email</label></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                            {% for i in 1..nb %}
+                                <tr style="font-size: larger">
+                                    <td class="column1" style="text-transform: capitalize"><input name="{{ key }}" value="{{ key }}" disabled></td>
+                                    <td class="column2"><input name="nom_{{ key }}_{{ i }}" type="text"></td>
+                                    <td class="column3"><input name="prenom_{{ key }}_{{ i }}" type="text"></td>
+                                    <td class="column4"><input name="email_{{ key }}_{{ i }}" type="email"></td>
+                                </tr>
+                            {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6">Pas de reservation séléctionée</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        {% endfor %}
+
+                            <button class="btn input100" style=" background: whitesmoke;width: auto;position: absolute;
+                            bottom: 10px;font-size: large;">
+                                <input type="submit" name="confirm" value="Validé">
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

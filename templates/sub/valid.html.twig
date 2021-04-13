@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Validation {% endblock %}
+
+{% block body %}
+    {% if valid %} valide
+    {% else %} pas valide
+    {% endif %}
+{% endblock %}
