@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Office;
 use App\Form\OfficeType;
 use App\Repository\OfficeRepository;
+use App\Repository\SubRepository;
 use App\Service\DateService;
+use App\Service\Extract;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,12 +21,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class OfficeController extends AbstractController
 {
     private OfficeRepository $officeRepo;
+    private SubRepository $subRepo;
     private EntityManagerInterface $em;
+    private Extract $excel;
 
-    public function __construct(OfficeRepository $officeRepo, EntityManagerInterface $em)
+    public function __construct(OfficeRepository $officeRepo,SubRepository $subRepo, EntityManagerInterface $em, Extract $excel)
     {
         $this->officeRepo=$officeRepo;
+        $this->subRepo=$subRepo;
         $this->em=$em;
+        $this->excel=$excel;
     }
 
     /**
@@ -33,30 +39,18 @@ class OfficeController extends AbstractController
     public function index(): Response
     {
         $office=$this->officeRepo->findAll();
-
+        foreach ($office as $off){
+            $left=$this->subRepo->list($off->getId());
+        }
+        if(!isset($left))
+            $left=0;
         return $this->render('office/index.html.twig', [
             'offices'=>$office,
-            'leftplace'=>0,
+            'leftplace'=>$left,
             'admin'=>false,
 
         ]);
     }
-
-    /**
-     * @Route("/admin/{admin}", name="office_admin")
-     * @return Response
-     */
-    public function admin(string $admin):Response
-    {
-        $office=$this->officeRepo->findAll();
-        return $this->render('office/index.html.twig', [
-            'offices'=>$office,
-            'leftplace'=>0,
-            'admin'=>$admin,
-
-        ]);
-    }
-
     /**
      * @Route("/new", name="office_new", methods={"GET","POST"})
      */
@@ -80,6 +74,28 @@ class OfficeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/admin/{admin}", name="office_admin")
+     * @return Response
+     */
+    public function admin(string $admin):Response
+    {
+        $office=$this->officeRepo->findAll();
+        foreach ($office as $off){
+            $left=$this->subRepo->list($off->getId());
+        }
+        if(!isset($left))
+            $left=0;
+        return $this->render('office/index.html.twig', [
+            'offices'=>$office,
+            'leftplace'=>$left,
+            'admin'=>$admin,
+
+        ]);
+    }
+
+
 
     /**
      * @Route("/{id}/{admin}", name="office_show", methods={"GET"})
@@ -116,6 +132,32 @@ class OfficeController extends AbstractController
     }
 
     /**
+     * @Route("/list", name="office_list",methods={"GET","POST"})
+     */
+    public function list(): Response
+    {
+        $office=$this->officeRepo->findAll();
+        return $this->render('office/list.html.twig', [
+            'offices' => $office,
+            'admin'=>$_GET["admin"],
+        ]);
+    }
+    /**
+     * @Route("/list/export", name="office_export",methods={"GET","POST"})
+     */
+    public function export():Response
+    {
+        $list=[];
+        if(!empty($_POST)) {
+            foreach ($_POST as $key => $value) {
+                $list[$key] = $this->subRepo->select($key);
+            }
+            $this->excel->extract($list);
+        }
+        return $this->render('sub/noth.html');
+    }
+
+    /**
      * @Route("/delete/{id}/{admin}", name="office_delete")
      */
     public function delete(Request $request, Office $office, $admin): Response
@@ -126,4 +168,5 @@ class OfficeController extends AbstractController
             'admin'=>$admin
         ]);
     }
+
 }

@@ -23,11 +23,13 @@ class SubController extends AbstractController
     private array $subs = [];
     private SessionInterface $session;
     private OfficeRepository $officeRepo;
-    public function __construct(EntityManagerInterface $em, SessionInterface $session, OfficeRepository $officeRepo){
+    private ContactController $contactController;
+    public function __construct(EntityManagerInterface $em, SessionInterface $session, OfficeRepository $officeRepo, ContactController $contactController){
         $this->em=$em;
         $this->session=$session;
         $this->session->start();
         $this->officeRepo=$officeRepo;
+        $this->contactController=$contactController;
 
     }
     /**
@@ -36,16 +38,19 @@ class SubController extends AbstractController
     public function index(): Response
     {
 
-
         if(empty($this->subs)) {
             foreach ($_POST as $key =>$value){
-                $this->subs[$key]=intval($value);
+                if($value>0)
+                    $this->subs[$key]=intval($value);
+
             }
-           $this->session->set("subs",$this->subs);
+            $this->session->set("subs",$this->subs);
+
         }
 
         return $this->render('sub/index.html.twig', [
             'subs'=>$this->subs,
+
         ]);
 
 
@@ -62,13 +67,20 @@ class SubController extends AbstractController
         foreach ($choice as $key=>$value) {
             for ($j=1;$j<$value+1;$j++){
                 $office=$this->officeRepo->find($key);
+
                 $sub =new Sub();
+
                 $sub->setIdOffice($office);
                 $sub->setNom($_POST["nom_".$key."_".$j]);
                 $sub->setPrenom($_POST["prenom_".$key."_".$j]);
                 $sub->setEmail($_POST["email_".$key."_".$j]);
+                $this->contactController->sendEmail($_POST["email_".$key."_".$j],[
+                    "sub"=>$sub,
+                    "office"=>$office,
+                ]);
                 $this->em->persist($sub);
                 $this->em->flush();
+
             }
         }
         return $this->redirectToRoute('valid_sub',['valid'=>true]);
@@ -105,6 +117,7 @@ class SubController extends AbstractController
         $valid=$_GET["valid"];
         if ($valid == null)
             $valid = false;
+        $this->session->clear();
         return $this->render('sub/valid.html.twig',[
             "valid"=>$valid,
         ]);

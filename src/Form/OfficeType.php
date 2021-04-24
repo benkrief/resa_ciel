@@ -21,6 +21,7 @@ class OfficeType extends AbstractType
                 'widget' => 'single_text',])
             ->add('hour', TimeType::class,[
                 'widget' => 'single_text' ])
+            ->add('lieu')
             ->add('maxSub')
         ;
     }

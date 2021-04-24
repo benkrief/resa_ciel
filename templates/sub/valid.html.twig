@@ -3,7 +3,21 @@
 {% block title %}{{ parent() }} - Validation {% endblock %}
 
 {% block body %}
-    {% if valid %} valide
-    {% else %} pas valide
+    {% if valid %}
+        <div class ="valid">
+        Votre inscription est maintenant validée.
+            <br>
+        Vous devriez avoir reçu une confirmation par mail.
+            <br>
+        A bientot 👋
+        </div>
+    {% else %}
+        <div class="valid">
+            Votre inscription a recontré un petit soucis.
+            <br>
+            Nous vous conseillons de bien vouloir recommencer => <a href="{{ path('office_index') }}" style="font-size: x-large; color: #0a66b7"> Les Offices</a>.
+            <br>
+            A bientot 👋
+        </div>
     {% endif %}
 {% endblock %}

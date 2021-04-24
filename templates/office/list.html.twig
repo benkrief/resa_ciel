@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}- Liste{% endblock %}
+
+{% block body %}
+    <form method="post" action="{{ path('office_export')}}">
+        <table class="table" style="background: whitesmoke">
+            <thead>
+            <tr class="table100-head">
+                <th class="column1">Date</th>
+                <th class="column2">Heure</th>
+                <th class="column1">Lieu</th>
+                <th class="column3">Nom</th>
+                <th class="column3">Ajouter</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for office in offices %}
+                <tr style="font-size: larger">
+                    <td class="column1" style="text-transform: capitalize">{{ office.date? office.date|format_datetime('full', 'none', locale='fr') }}</td>
+                    <td class="column2">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
+                    <td class="column1">{{ office.lieu }}</td>
+                    <td class="column3">{{ office.title }}</td>
+                    <td class="column3"><input type="checkbox" name="{{ office.id }}"></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Pas d'office</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large;
+                            display: inline; margin-right:5px; margin-bottom: 10px;  " ><input type="submit" value="Télécharger"></button>
+        <button class="btn input100" style="background: whitesmoke; width: auto;
+                            display: inline; margin-right:5px; margin-bottom: 10px;  " >
+            <a style="font-size: medium;color: black" href="{{ path('office_admin', {'admin':admin }) }}">
+                Revenir aux offices
+            </a>
+        </button>
+    </form>
+{% endblock %}

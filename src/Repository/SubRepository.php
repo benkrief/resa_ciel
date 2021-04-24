@@ -19,6 +19,26 @@ class SubRepository extends ServiceEntityRepository
         parent::__construct($registry, Sub::class);
     }
 
+    public function select(int $id): ?array
+    {
+        return $this->createQueryBuilder('s')
+            ->select('s.nom','s.prenom')
+            ->where('s.idOffice = :id')
+            ->setParameter(':id', $id)
+            ->getQuery()
+            ->getResult();
+    }
+    public function list(int $id): ?int
+    {
+        return $this->createQueryBuilder('s')
+            ->select('count(s.id)')
+            ->where('s.idOffice = :id')
+            ->setParameter(':id', $id)
+            ->getQuery()
+            ->getSingleScalarResult()
+            ;
+    }
+
     // /**
     //  * @return Sub[] Returns an array of Sub objects
     //  */

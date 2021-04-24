@@ -39,8 +39,15 @@ class Office
      */
     private $hour;
 
+
+
     /**
-     * @ORM\OneToMany(targetEntity=Sub::class, mappedBy="idOffice")
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Lieu;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Sub::class, mappedBy="idOffice", orphanRemoval=true, cascade="remove")
      */
     private $subs;
 
@@ -48,6 +55,7 @@ class Office
     {
         $this->subs = new ArrayCollection();
     }
+
 
 
 
@@ -136,5 +144,22 @@ class Office
         }
 
         return $this;
+    }
+
+    public function getLieu(): ?string
+    {
+        return $this->Lieu;
+    }
+
+    public function setLieu(string $Lieu): self
+    {
+        $this->Lieu = $Lieu;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getId();
     }
 }

@@ -18,13 +18,22 @@ body {
 }
 #inscr{
     text-align: center;
-    color:grey;
+    color:whitesmoke;
     margin-top: 10px;
     border: 3px outset #FFFFFF;
     border-radius: 27px;
-    background: whitesmoke;
+    background: dimgrey;
     width:fit-content;
     font-size: xxx-large;
     margin-left: auto;
     margin-right: auto;
+}
+.valid{
+    background: whitesmoke;
+    font-family: Raleway-SemiBold,sans-serif;
+    padding: 10px;
+    font-size: x-large;
+    text-align: center;
+    border: 5px ridge #A4A4A4;
+    border-radius: 9px;
 }

@@ -17,7 +17,18 @@
                 <div class="wrap-table100">
                     <div class="table100">
                         {% if admin=="ben" or admin=="ravdayan" %}
-                        <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large; position: center" >  <a href="{{ path('office_new', {'admin': admin}) }}">Ajouter un office</a></button>
+                            <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large;
+                            display: inline; margin-right:5px; margin-bottom: 10px;  " >
+                                <a href="{{ path('office_new', {'admin': admin}) }}">
+                                    Ajouter un office
+                                </a>
+                            </button>
+                            <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large;
+                            display: inline; margin-right:5px; margin-bottom: 10px; " >
+                                <a href="{{ path('office_list', {'admin': admin}) }}">
+                                    Imprimer liste
+                                </a>
+                            </button>
                         {% endif %}
                         <br>
                         <form method="post" action="{{ path('sub') }}">
@@ -26,7 +37,8 @@
                                 <tr class="table100-head">
                                     <th class="column1">Date</th>
                                     <th class="column2">Heure</th>
-                                    <th class="column3">Nom</th>
+                                    <th class="column1">Lieu</th>
+                                    <th class="column3">Office</th>
                                     <th class="column4">Nombres de places</th>
                                     <th class="column5">Places Restantes</th>
                                     <th class="column6">Vos places</th>
@@ -39,6 +51,7 @@
                                     <tr style="font-size: larger">
                                         <td class="column1" style="text-transform: capitalize">{{ office.date? office.date|format_datetime('full', 'none', locale='fr') }}</td>
                                         <td class="column2">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
+                                        <td class="column3">{{ office.lieu }}</td>
                                         <td class="column3">{{ office.title }}</td>
                                         <td class="column4">{{ office.maxSub }}</td>
                                         <td class="column5">{{ office.maxSub-leftplace }}</td>

@@ -18,7 +18,6 @@ class OfficeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Office::class);
     }
-
     // /**
     //  * @return Office[] Returns an array of Office objects
     //  */
