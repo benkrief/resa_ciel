@@ -6,9 +6,7 @@ use App\Entity\Office;
 use App\Form\OfficeType;
 use App\Repository\OfficeRepository;
 use App\Repository\SubRepository;
-use App\Service\DateService;
 use App\Service\Extract;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,10 +42,18 @@ class OfficeController extends AbstractController
         }
         if(!isset($left))
             $left=0;
+
+        $dateo=[];
+        foreach ($this->officeRepo->date_office() as $doff){
+            setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
+            $dateo[$doff["id"]]=strftime('%A %e %B %Y',strtotime(date_format($doff["date"],'l j F Y')));
+        }
+
         return $this->render('office/index.html.twig', [
             'offices'=>$office,
             'leftplace'=>$left,
             'admin'=>false,
+            "dateo"=>$dateo,
 
         ]);
     }
@@ -160,7 +166,7 @@ class OfficeController extends AbstractController
     /**
      * @Route("/delete/{id}/{admin}", name="office_delete")
      */
-    public function delete(Request $request, Office $office, $admin): Response
+    public function delete(Office $office, $admin): Response
     {
             $this->em->remove($office);
             $this->em->flush();

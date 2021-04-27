@@ -17,7 +17,7 @@
                                 <table class="table" style="background: whitesmoke">
                                     <thead>
                                     <tr class="table100-head">
-                                        <th class="column1">Personne</th>
+                                        <th class="column1"><label style="color: yellow">Office</label></th>
                                         <th class="column2"><label>Nom</label></th>
                                         <th class="column3"><label>Prénom</label></th>
                                         <th class="column3"><label>Email</label></th>
@@ -28,7 +28,7 @@
                                     <tr style="font-size: larger">
                                         <td class="column1" style="text-transform: capitalize">
                                             <label>
-                                                {{ i }}
+                                               {% for cle,valeur in office %}{% if cle==key%} {{ valeur }} {% endif %}{% endfor %}
                                             </label>
                                         </td>
                                         <td class="column2">

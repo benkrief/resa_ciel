@@ -21,19 +21,21 @@ class OfficeRepository extends ServiceEntityRepository
     // /**
     //  * @return Office[] Returns an array of Office objects
     //  */
-    /*
-    public function findByExampleField($value)
+    public function office(): ?array
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
+            ->select('o.id','o.title')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getArrayResult();
     }
-    */
+
+    public function date_office(): ?array
+    {
+        return $this->createQueryBuilder('o')
+            ->select('o.id','o.date')
+            ->getQuery()
+            ->getArrayResult();
+    }
 
     /*
     public function findOneBySomeField($value): ?Office

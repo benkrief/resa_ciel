@@ -3,19 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Sub;
-use App\Form\OfficeType;
-use App\Form\SubFormType;
 use App\Repository\OfficeRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 
 class SubController extends AbstractController
 {
@@ -42,14 +35,20 @@ class SubController extends AbstractController
             foreach ($_POST as $key =>$value){
                 if($value>0)
                     $this->subs[$key]=intval($value);
-
             }
             $this->session->set("subs",$this->subs);
+            $office=[];
+
+            foreach ($this->officeRepo->office() as $off){
+                $office[$off["id"]]=$off["title"];
+            }
+
 
         }
 
         return $this->render('sub/index.html.twig', [
             'subs'=>$this->subs,
+            'office'=>$office,
 
         ]);
 

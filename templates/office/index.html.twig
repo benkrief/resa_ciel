@@ -49,13 +49,15 @@
 
                                 {% for office in offices %}
                                     <tr style="font-size: larger">
-                                        <td class="column1" style="text-transform: capitalize">{{ office.date? office.date|format_datetime('full', 'none', locale='fr') }}</td>
+                                        <td class="column1" style="text-transform: capitalize"><label>
+                                                {% for cle,valeur in dateo %}{% if cle==office.id%} {{ valeur }} {% endif %}{% endfor %}
+                                            </label></td>
                                         <td class="column2">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
                                         <td class="column3">{{ office.lieu }}</td>
                                         <td class="column3">{{ office.title }}</td>
                                         <td class="column4">{{ office.maxSub }}</td>
                                         <td class="column5">{{ office.maxSub-leftplace }}</td>
-                                        <td class="column6"><input type="number" placeholder="0" name="{{ office.id }}" style="text-align: right;"></td>
+                                        <td class="column6"><label><input type="number" placeholder="0" name="{{ office.id }}" style="text-align: right;width: 100%;" min="0" max="{{ office.maxSub-leftplace }}"></label></td>
                                         {% if admin=="ben" or admin=="ravdayan" %}<td style="text-align: center;">
                                             <a href="{{ path('office_show', {'id': office.id, 'admin':admin }) }}">Detail</a><br>
                                             <a href="{{ path('office_edit', {'id': office.id, 'admin':admin}) }}">Modifier</a><br>
