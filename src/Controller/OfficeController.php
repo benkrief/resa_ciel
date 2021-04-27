@@ -11,7 +11,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -44,10 +43,17 @@ class OfficeController extends AbstractController
         if(!isset($left))
             $left=0;
 
+        $dateo=[];
+        foreach ($this->officeRepo->date_office() as $doff){
+            setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
+            $dateo[$doff["id"]]=strftime('%A %e %B %Y',strtotime(date_format($doff["date"],'l j F Y')));
+        }
+
         return $this->render('office/index.html.twig', [
             'offices'=>$office,
             'leftplace'=>$left,
             'admin'=>false,
+            "dateo"=>$dateo,
 
         ]);
     }
@@ -87,10 +93,17 @@ class OfficeController extends AbstractController
         }
         if(!isset($left))
             $left=0;
+
+        $dateo=[];
+        foreach ($this->officeRepo->date_office() as $doff){
+            setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
+            $dateo[$doff["id"]]=strftime('%A %e %B %Y',strtotime(date_format($doff["date"],'l j F Y')));
+        }
         return $this->render('office/index.html.twig', [
             'offices'=>$office,
             'leftplace'=>$left,
             'admin'=>$admin,
+            'dateo'=>$dateo,
 
         ]);
     }
@@ -120,7 +133,7 @@ class OfficeController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('office_admin',[
-            'admin'=>$admin,
+                'admin'=>$admin,
             ]);
         }
 
@@ -162,8 +175,8 @@ class OfficeController extends AbstractController
      */
     public function delete(Office $office, $admin): Response
     {
-            $this->em->remove($office);
-            $this->em->flush();
+        $this->em->remove($office);
+        $this->em->flush();
         return $this->redirectToRoute('office_admin',[
             'admin'=>$admin
         ]);

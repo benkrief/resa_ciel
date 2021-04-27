@@ -3,19 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Sub;
-use App\Form\OfficeType;
-use App\Form\SubFormType;
 use App\Repository\OfficeRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
 
 class SubController extends AbstractController
 {
@@ -42,14 +35,20 @@ class SubController extends AbstractController
             foreach ($_POST as $key =>$value){
                 if($value>0)
                     $this->subs[$key]=intval($value);
-
             }
             $this->session->set("subs",$this->subs);
+            $office=[];
+
+            foreach ($this->officeRepo->office() as $off){
+                $office[$off["id"]]=$off["title"];
+            }
+
 
         }
 
         return $this->render('sub/index.html.twig', [
             'subs'=>$this->subs,
+            'office'=>$office,
 
         ]);
 
@@ -59,7 +58,7 @@ class SubController extends AbstractController
     /**
      * @Route("/sub/confirm", name="sub_confirm")
      * @return Response
-    */
+     */
     public function confirm():Response
     {
 
@@ -90,22 +89,22 @@ class SubController extends AbstractController
     public function table(Request $request):Response
     {
 
-        $sub = new Sub();
-        $form = $this->createForm(SubFormType::class,$sub);
-        $form->handleRequest($request);
+    $sub = new Sub();
+    $form = $this->createForm(SubFormType::class,$sub);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($sub);
-            $this->em->flush();
+    if ($form->isSubmitted() && $form->isValid()) {
+    $this->em->persist($sub);
+    $this->em->flush();
 
-            return $this->redirectToRoute('valid_sub',['valid'=>true]);
-        }
+    return $this->redirectToRoute('valid_sub',['valid'=>true]);
+    }
 
-        return $this->render('sub/index.html.twig', [
-            'subs'=>[1=>2,2=>1],
-            'form' => $form->createView(),
+    return $this->render('sub/index.html.twig', [
+    'subs'=>[1=>2,2=>1],
+    'form' => $form->createView(),
 
-        ]);
+    ]);
     }*/
 
     /**

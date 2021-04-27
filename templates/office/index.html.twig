@@ -32,8 +32,8 @@
                         {% endif %}
                         <br>
                         <form method="post" action="{{ path('sub') }}">
-                        <table class="table" style="background: whitesmoke">
-                            <thead>
+                            <table class="table" style="background: whitesmoke">
+                                <thead>
                                 <tr class="table100-head">
                                     <th class="column1">Date</th>
                                     <th class="column2">Heure</th>
@@ -44,32 +44,34 @@
                                     <th class="column6">Vos places</th>
                                     {% if admin=="ben" or admin=="ravdayan" %}<th class="column5">Action</th>{% endif %}
                                 </tr>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
 
                                 {% for office in offices %}
                                     <tr style="font-size: larger">
-                                        <td class="column1" style="text-transform: capitalize">{{ office.date? office.date|localizeddate('full', 'none', locale) }}</td>
+                                        <td class="column1" style="text-transform: capitalize"><label>
+                                                {% for cle,valeur in dateo %}{% if cle==office.id%} {{ valeur }} {% endif %}{% endfor %}
+                                            </label></td>
                                         <td class="column2">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
                                         <td class="column3">{{ office.lieu }}</td>
                                         <td class="column3">{{ office.title }}</td>
                                         <td class="column4">{{ office.maxSub }}</td>
                                         <td class="column5">{{ office.maxSub-leftplace }}</td>
-                                        <td class="column6"><label><input type="number" placeholder="0" name="{{ office.id }}" style="text-align: right;"></label></td>
+                                        <td class="column6"><label><input type="number" placeholder="0" name="{{ office.id }}" style="text-align: right;width: 100%;" min="0" max="{{ office.maxSub-leftplace }}"></label></td>
                                         {% if admin=="ben" or admin=="ravdayan" %}<td style="text-align: center;">
                                             <a href="{{ path('office_show', {'id': office.id, 'admin':admin }) }}">Detail</a><br>
                                             <a href="{{ path('office_edit', {'id': office.id, 'admin':admin}) }}">Modifier</a><br>
                                             <a href="{{ path('office_delete', {'id': office.id, 'admin':admin}) }}">Supprimer</a>
-                                        </td>{% endif %}
+                                            </td>{% endif %}
                                     </tr>
                                 {% else %}
                                     <tr>
                                         <td colspan="6">Pas d'office</td>
                                     </tr>
                                 {% endfor %}
-                            </tbody>
-                        </table>
-                        <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large; position: relative;margin: auto" ><input type="submit" value="Reservez"></button>
+                                </tbody>
+                            </table>
+                            <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large; position: relative;margin: auto" ><input type="submit" value="Reservez"></button>
                         </form>
 
                     </div>
