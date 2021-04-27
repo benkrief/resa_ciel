@@ -38,10 +38,17 @@ class OfficeController extends AbstractController
     {
         $office=$this->officeRepo->findAll();
         foreach ($office as $off){
-            $left=$this->subRepo->list($off->getId());
+            if(!isset($left))
+                $left[$off->getId()]=0;
+            else
+                $left[$off->getId()]=$this->subRepo->list($off->getId());
         }
-        if(!isset($left))
-            $left=0;
+        foreach ($office as $off){
+            if(!isset($left))
+                $leftmax[$off->getId()]=0;
+            else
+                $leftmax[$off->getId()]=$off->getMaxSub()-($this->subRepo->list($off->getId()));
+        }
 
         $dateo=[];
         foreach ($this->officeRepo->date_office() as $doff){
@@ -61,6 +68,7 @@ class OfficeController extends AbstractController
             'leftplace'=>$left,
             'admin'=>false,
             "dateo"=>$date,
+            "max"=>$leftmax,
 
         ]);
     }
@@ -96,11 +104,17 @@ class OfficeController extends AbstractController
     {
         $office=$this->officeRepo->findAll();
         foreach ($office as $off){
-            $left=$this->subRepo->list($off->getId());
+            if(!isset($left))
+                $left[$off->getId()]=0;
+            else
+                $left[$off->getId()]=$this->subRepo->list($off->getId());
         }
-        if(!isset($left))
-            $left=0;
-
+        foreach ($office as $off){
+            if(!isset($left))
+                $leftmax[$off->getId()]=0;
+            else
+                $leftmax[$off->getId()]=$off->getMaxSub()-($this->subRepo->list($off->getId()));
+        }
         $dateo=[];
         foreach ($this->officeRepo->date_office() as $doff){
             $dateo[$doff["id"]]=array('jour'=>date_format($doff["date"],'N'),'nbjour'=>date_format($doff["date"],'j'),'mois'=>date_format($doff["date"],'n'),'annee'=>date_format($doff["date"],'Y'));
@@ -117,6 +131,7 @@ class OfficeController extends AbstractController
             'leftplace'=>$left,
             'admin'=>$admin,
             'dateo'=>$date,
+            'max'=>$leftmax,
 
         ]);
     }
