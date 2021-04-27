@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Intl\Timezones;
+
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -44,12 +44,10 @@ class OfficeController extends AbstractController
         if(!isset($left))
             $left=0;
 
-        $locale = Timezones::getNames("fr");
         return $this->render('office/index.html.twig', [
             'offices'=>$office,
             'leftplace'=>$left,
             'admin'=>false,
-            'locale'=>$locale,
 
         ]);
     }
