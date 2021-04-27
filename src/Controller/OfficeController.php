@@ -45,15 +45,22 @@ class OfficeController extends AbstractController
 
         $dateo=[];
         foreach ($this->officeRepo->date_office() as $doff){
-            setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
-            $dateo[$doff["id"]]=strftime('%A %e %B %Y',strtotime(date_format($doff["date"],'l j F Y')));
+            $dateo[$doff["id"]]=array('jour'=>date_format($doff["date"],'N'),'nbjour'=>date_format($doff["date"],'j'),'mois'=>date_format($doff["date"],'n'),'annee'=>date_format($doff["date"],'Y'));
         }
+
+        $date=[];
+        foreach ($dateo as $key=>$d){
+            if ($d["jour"]==1){$j="Lundi";}elseif($d["jour"]==2){$j="Mardi";}elseif($d["jour"]==3){$j="Mercredi";}elseif($d["jour"]==4){$j="Jeudi";}elseif($d["jour"]==5){$j="Vendredi";}elseif($d["jour"]==6){$j="Samedi";}else{$j="Dimanche";}
+            if($d["mois"]==1){$m="Janvier";}elseif($d["mois"]==2){$m="Fevrier";}elseif($d["mois"]==3){$m="Mars";}elseif($d["mois"]==4){$m="Avril";}elseif($d["mois"]==5){$m="Mai";}elseif($d["mois"]==6){$m="Juin";}elseif($d["mois"]==7){$m="Juillet";}elseif($d["mois"]==8){$m="Aout";}elseif($d["mois"]==9){$m="Septembre";}elseif($d["mois"]==10){$m="Octobre";}elseif($d["mois"]==11){$m="Novembre";}else{$m="Décembre";}
+            $date[$key]=$j.' '.$d["nbjour"].' '.$m.' '.$d["annee"];
+        }
+
 
         return $this->render('office/index.html.twig', [
             'offices'=>$office,
             'leftplace'=>$left,
             'admin'=>false,
-            "dateo"=>$dateo,
+            "dateo"=>$date,
 
         ]);
     }
@@ -96,14 +103,20 @@ class OfficeController extends AbstractController
 
         $dateo=[];
         foreach ($this->officeRepo->date_office() as $doff){
-            setlocale(LC_ALL, 'fr_FR.UTF8', 'fr_FR','fr','fr','fra','fr_FR@euro');
-            $dateo[$doff["id"]]=strftime('%A %e %B %Y',strtotime(date_format($doff["date"],'l j F Y')));
+            $dateo[$doff["id"]]=array('jour'=>date_format($doff["date"],'N'),'nbjour'=>date_format($doff["date"],'j'),'mois'=>date_format($doff["date"],'n'),'annee'=>date_format($doff["date"],'Y'));
+        }
+
+        $date=[];
+        foreach ($dateo as $key=>$d){
+            if ($d["jour"]==1){$j="Lundi";}elseif($d["jour"]==2){$j="Mardi";}elseif($d["jour"]==3){$j="Mercredi";}elseif($d["jour"]==4){$j="Jeudi";}elseif($d["jour"]==5){$j="Vendredi";}elseif($d["jour"]==6){$j="Samedi";}else{$j="Dimanche";}
+            if($d["mois"]==1){$m="Janvier";}elseif($d["mois"]==2){$m="Fevrier";}elseif($d["mois"]==3){$m="Mars";}elseif($d["mois"]==4){$m="Avril";}elseif($d["mois"]==5){$m="Mai";}elseif($d["mois"]==6){$m="Juin";}elseif($d["mois"]==7){$m="Juillet";}elseif($d["mois"]==8){$m="Aout";}elseif($d["mois"]==9){$m="Septembre";}elseif($d["mois"]==10){$m="Octobre";}elseif($d["mois"]==11){$m="Novembre";}else{$m="Décembre";}
+            $date[$key]=$j.' '.$d["nbjour"].' '.$m.' '.$d["annee"];
         }
         return $this->render('office/index.html.twig', [
             'offices'=>$office,
             'leftplace'=>$left,
             'admin'=>$admin,
-            'dateo'=>$dateo,
+            'dateo'=>$date,
 
         ]);
     }
