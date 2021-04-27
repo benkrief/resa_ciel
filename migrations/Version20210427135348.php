@@ -24,7 +24,8 @@ final class Version20210427135348 extends AbstractMigration
         $this->addSql("CREATE TABLE office (id INT DEFAULT NEXTVAL ('office_seq') NOT NULL, title VARCHAR(255) NOT NULL, max_sub INT NOT NULL, date DATE NOT NULL, hour TIME(0) NOT NULL, lieu VARCHAR(255) NOT NULL, PRIMARY KEY(id))");
         $this->addSql("CREATE SEQUENCE sub_seq");
         $this->addSql("CREATE TABLE sub (id INT DEFAULT NEXTVAL ('sub_seq') NOT NULL, id_office_id INT NOT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL, PRIMARY KEY(id))");
-        $this->addSql("CREATE INDEX IDX_580282DC7F957E03 ON sub (id_office_id); ALTER TABLE sub ADD CONSTRAINT FK_580282DC7F957E03 FOREIGN KEY (id_office_id) REFERENCES office (id);");
+        $this->addSql("CREATE INDEX IDX_580282DC7F957E03 ON sub (id_office_id)");
+        $this->addSql("ALTER TABLE sub ADD CONSTRAINT FK_580282DC7F957E03 FOREIGN KEY (id_office_id) REFERENCES office (id)");
     }
 
     public function down(Schema $schema): void
