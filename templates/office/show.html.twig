@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} Office{% endblock %}
+{% block title %}{{ parent() }} Detail {% endblock %}
 
 {% block body %}
     <h1>Office</h1>
@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ office.date ? office.date|date('D F Y') : '' }}</td>
+                <td>{{ date }}</td>
             </tr>
             <tr>
                 <th>Heure</th>
