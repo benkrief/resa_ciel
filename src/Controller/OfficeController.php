@@ -6,13 +6,12 @@ use App\Entity\Office;
 use App\Form\OfficeType;
 use App\Repository\OfficeRepository;
 use App\Repository\SubRepository;
-use App\Service\DateService;
 use App\Service\Extract;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Timezones;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -44,10 +43,13 @@ class OfficeController extends AbstractController
         }
         if(!isset($left))
             $left=0;
+
+        $locale = Timezones::getNames("fr");
         return $this->render('office/index.html.twig', [
             'offices'=>$office,
             'leftplace'=>$left,
             'admin'=>false,
+            'locale'=>$locale,
 
         ]);
     }
@@ -160,7 +162,7 @@ class OfficeController extends AbstractController
     /**
      * @Route("/delete/{id}/{admin}", name="office_delete")
      */
-    public function delete(Request $request, Office $office, $admin): Response
+    public function delete(Office $office, $admin): Response
     {
             $this->em->remove($office);
             $this->em->flush();
