@@ -37,6 +37,15 @@ class OfficeRepository extends ServiceEntityRepository
             ->getArrayResult();
     }
 
+    public function date_office_id(int $id): ?array
+    {
+        return $this->createQueryBuilder('o')
+            ->select('o.id','o.date')
+            ->where('o.id = :id')
+            ->setParameter(':id', $id)
+            ->getQuery()
+            ->getArrayResult();
+    }
     /*
     public function findOneBySomeField($value): ?Office
     {

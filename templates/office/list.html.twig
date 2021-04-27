@@ -18,11 +18,11 @@
 
             {% for office in offices %}
                 <tr style="font-size: larger">
-                    <td class="column1" style="text-transform: capitalize">{{ office.date? office.date|format_datetime('full', 'none', locale='fr') }}</td>
+                    <td class="column1" style="text-transform: capitalize">{% for cle,valeur in date %}{% if cle==office.id%} {{ valeur }} {% endif %}{% endfor %}</td>
                     <td class="column2">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
                     <td class="column1">{{ office.lieu }}</td>
                     <td class="column3">{{ office.title }}</td>
-                    <td class="column3"><input type="checkbox" name="{{ office.id }}"></td>
+                    <td class="column3"><label><input type="checkbox" name="{{ office.id }}"></label></td>
                 </tr>
             {% else %}
                 <tr>

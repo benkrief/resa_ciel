@@ -128,9 +128,21 @@ class OfficeController extends AbstractController
      */
     public function show(Office $office, $admin): Response
     {
+        $dateo=[];
+        foreach ($this->officeRepo->date_office_id($office->getId()) as $doff){
+            $dateo[$doff["id"]]=array('jour'=>date_format($doff["date"],'N'),'nbjour'=>date_format($doff["date"],'j'),'mois'=>date_format($doff["date"],'n'),'annee'=>date_format($doff["date"],'Y'));
+        }
+
+        $date=[];
+        foreach ($dateo as $d){
+            if ($d["jour"]==1){$j="Lundi";}elseif($d["jour"]==2){$j="Mardi";}elseif($d["jour"]==3){$j="Mercredi";}elseif($d["jour"]==4){$j="Jeudi";}elseif($d["jour"]==5){$j="Vendredi";}elseif($d["jour"]==6){$j="Samedi";}else{$j="Dimanche";}
+            if($d["mois"]==1){$m="Janvier";}elseif($d["mois"]==2){$m="Fevrier";}elseif($d["mois"]==3){$m="Mars";}elseif($d["mois"]==4){$m="Avril";}elseif($d["mois"]==5){$m="Mai";}elseif($d["mois"]==6){$m="Juin";}elseif($d["mois"]==7){$m="Juillet";}elseif($d["mois"]==8){$m="Aout";}elseif($d["mois"]==9){$m="Septembre";}elseif($d["mois"]==10){$m="Octobre";}elseif($d["mois"]==11){$m="Novembre";}else{$m="Décembre";}
+            $date=$j.' '.$d["nbjour"].' '.$m.' '.$d["annee"];
+        }
         return $this->render('office/show.html.twig', [
             'office' => $office,
             'admin'=>$admin,
+            'date'=>$date
         ]);
     }
 
@@ -146,7 +158,7 @@ class OfficeController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('office_admin',[
-            'admin'=>$admin,
+                'admin'=>$admin,
             ]);
         }
 
@@ -163,9 +175,21 @@ class OfficeController extends AbstractController
     public function list(): Response
     {
         $office=$this->officeRepo->findAll();
+        $dateo=[];
+        foreach ($this->officeRepo->date_office() as $doff){
+            $dateo[$doff["id"]]=array('jour'=>date_format($doff["date"],'N'),'nbjour'=>date_format($doff["date"],'j'),'mois'=>date_format($doff["date"],'n'),'annee'=>date_format($doff["date"],'Y'));
+        }
+
+        $date=[];
+        foreach ($dateo as $key=>$d){
+            if ($d["jour"]==1){$j="Lundi";}elseif($d["jour"]==2){$j="Mardi";}elseif($d["jour"]==3){$j="Mercredi";}elseif($d["jour"]==4){$j="Jeudi";}elseif($d["jour"]==5){$j="Vendredi";}elseif($d["jour"]==6){$j="Samedi";}else{$j="Dimanche";}
+            if($d["mois"]==1){$m="Janvier";}elseif($d["mois"]==2){$m="Fevrier";}elseif($d["mois"]==3){$m="Mars";}elseif($d["mois"]==4){$m="Avril";}elseif($d["mois"]==5){$m="Mai";}elseif($d["mois"]==6){$m="Juin";}elseif($d["mois"]==7){$m="Juillet";}elseif($d["mois"]==8){$m="Aout";}elseif($d["mois"]==9){$m="Septembre";}elseif($d["mois"]==10){$m="Octobre";}elseif($d["mois"]==11){$m="Novembre";}else{$m="Décembre";}
+            $date[$key]=$j.' '.$d["nbjour"].' '.$m.' '.$d["annee"];
+        }
         return $this->render('office/list.html.twig', [
             'offices' => $office,
             'admin'=>$_GET["admin"],
+            'date'=>$date,
         ]);
     }
     /**
@@ -188,8 +212,8 @@ class OfficeController extends AbstractController
      */
     public function delete(Office $office, $admin): Response
     {
-            $this->em->remove($office);
-            $this->em->flush();
+        $this->em->remove($office);
+        $this->em->flush();
         return $this->redirectToRoute('office_admin',[
             'admin'=>$admin
         ]);
