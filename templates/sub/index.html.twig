@@ -28,7 +28,7 @@
                                     <tr style="font-size: larger">
                                         <td class="column1" style="text-transform: capitalize">
                                             <label>
-                                                {% for cle,valeur in office %}{% if cle==key%} {{ valeur }} {% endif %}{% endfor %}
+                                                {% for cle,valeur in office %}{% if cle==key%} {{ valeur.title }} - {{ valeur.lieu}} - {{ valeur.date}} {{ valeur.hour}} {% endif %}{% endfor %}
                                             </label>
                                         </td>
                                         <td class="column2">

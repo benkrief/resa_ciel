@@ -9,9 +9,9 @@
         </h1>
         <br>
         <p>
-            Votre inscription pour l'office de {{ office.title }} a bien été prise en compte.
+            Votre inscription pour l'office de {{ office.title }} a {{ office.lieu}} a bien été prise en compte.
             <br>
-            Merci de venir à l'heure et respecter les règles sanitaires.
+            Merci de venir à {{ office.hour? office.hour|date('G:i') : ''   }} et de respecter les règles sanitaires 😷
             <br>
             A bientot 👋
         </p>
