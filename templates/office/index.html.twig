@@ -52,12 +52,12 @@
                                 {% for office in offices %}
 
                                     <tr style="font-size: larger">
-                                        <td class="column1" style="text-transform: capitalize"><label>
+                                        <td class="column3" style="text-transform: capitalize; width:20%;"><label>
                                                 {% for cle,valeur in dateo %}{% if cle==office.id%} {{ valeur }} {% endif %}{% endfor %}
                                             </label></td>
                                         <td class="column2">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
-                                        <td class="column3">{{ office.paracha }}</td>
-                                        <td class="column3">{{ office.lieu }}</td>
+                                        <td class="column3" style="text-transform: capitalize; width:20%;">{{ office.paracha }}</td>
+                                        <td class="column3" style="text-transform: capitalize; width:20%;">{{ office.lieu }}</td>
                                         <td class="column3">{{ office.title }}</td>
                                         <td class="column4">{{ office.maxSub }}</td>
                                         <td class="column5">{% for cle,valeur in max %}{% if cle==office.id %} {{ valeur }}{% endif %}{% endfor %} </td>
