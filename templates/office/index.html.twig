@@ -38,6 +38,7 @@
                                 <tr class="table100-head">
                                     <th class="column1">Date</th>
                                     <th class="column2">Heure</th>
+                                    <th class="column1">Paracha</th>
                                     <th class="column1">Lieu</th>
                                     <th class="column3">Office</th>
                                     <th class="column4">Nombres de places</th>
@@ -55,6 +56,7 @@
                                                 {% for cle,valeur in dateo %}{% if cle==office.id%} {{ valeur }} {% endif %}{% endfor %}
                                             </label></td>
                                         <td class="column2">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
+                                        <td class="column3">{{ office.paracha }}</td>
                                         <td class="column3">{{ office.lieu }}</td>
                                         <td class="column3">{{ office.title }}</td>
                                         <td class="column4">{{ office.maxSub }}</td>

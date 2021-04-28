@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\OfficeRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -51,6 +52,11 @@ class Office
      */
     private $subs;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $paracha;
+
     public function __construct()
     {
         $this->subs = new ArrayCollection();
@@ -92,24 +98,24 @@ class Office
     }
 
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?DateTimeInterface
     {
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(DateTimeInterface $date): self
     {
         $this->date = $date;
 
         return $this;
     }
 
-    public function getHour(): ?\DateTimeInterface
+    public function getHour(): ?DateTimeInterface
     {
         return $this->hour;
     }
 
-    public function setHour(\DateTimeInterface $hour): self
+    public function setHour(DateTimeInterface $hour): self
     {
         $this->hour = $hour;
 
@@ -161,5 +167,17 @@ class Office
     public function __toString()
     {
         return (string) $this->getId();
+    }
+
+    public function getParacha(): ?string
+    {
+        return $this->paracha;
+    }
+
+    public function setParacha(string $paracha): self
+    {
+        $this->paracha = $paracha;
+
+        return $this;
     }
 }
