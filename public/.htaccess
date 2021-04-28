@@ -68,4 +68,4 @@ DirectoryIndex index.php
 RewriteEngine on
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP_HOST} (www\.)?resaciel.eu
-RewriteRule (.*) https://www.resaciel.eu/office
+RewriteRule (.*) https://%{HTTP_HOST}(www\.)?resaciel.eu
