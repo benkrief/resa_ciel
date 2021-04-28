@@ -19,7 +19,7 @@
                                 <tr class="table100-head">
                                     <th class="column1"><label style="color: yellow">Office</label></th>
                                     <th class="column2"><label>Nom</label></th>
-                                    <th class="column3"><label>Prénom</label></th>
+                                    <th class="column2"><label>Prénom</label></th>
                                     <th class="column3"><label>Email</label></th>
                                 </tr>
                                 </thead>
@@ -32,30 +32,29 @@
                                             </label>
                                         </td>
                                         <td class="column2 non">
-                                            <label>
-                                                <input name="nom_{{ key }}_{{ i }}" type="text" placeholder="Votre Nom">
+                                            <label style="border: 4px inset rgba(68,68,68,0.56); padding: 4px;">
+                                                <input name="nom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Nom" style="width: 100%;">
                                             </label>
                                         </td>
                                         <td class="column3 non">
-                                            <label>
-                                                <input name="prenom_{{ key }}_{{ i }}" type="text" placeholder="Votre Prénom">
+                                            <label style="border: 4px inset rgba(68,68,68,0.56); padding: 2px;">
+                                                <input name="prenom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Prénom"  style="width: 100%;">
                                             </label>
                                         </td>
                                         <td class="column3 non">
-                                            <label>
-                                                <input name="email_{{ key }}_{{ i }}" type="email" placeholder="Votre Email">
+                                            <label style="border: 4px inset rgba(68,68,68,0.56); padding: 2px;">
+                                                <input name="email_{{ key }}_{{ i }}"  type="email"  placeholder="Votre Email"  style="width: 100%;">
                                             </label>
                                         </td>
+
                                     </tr>
                                 {% endfor %}
                             {% else %}
                                 <tr>
                                     <td colspan="6">Pas de reservation séléctionée</td>
                                 </tr>
-
                                 </tbody>
                                 </table>
-
                             {% endfor %}
 
                             <button class="btn input100" style=" background: black; width: auto;position: fixed;
@@ -66,8 +65,6 @@
 
                     </div>
                 </div>
-            </div>
         </div>
     </div>
-    <script>for (let i = 0 ; i<4; i++){document.g}</script>
 {% endblock %}
