@@ -1,3 +1,6 @@
 homepage:
     path: /office_index
     controller: App\Controller\OfficeController::index
+    defaults:
+        path: /office_index
+        permanent: true

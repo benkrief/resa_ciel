@@ -64,8 +64,3 @@ DirectoryIndex index.php
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
-
-RewriteEngine on
-RewriteCond %{HTTPS} off
-RewriteCond %{HTTP_HOST} (www\.)?resaciel.eu
-RewriteRule (.*) https://%{HTTP_HOST}(www\.)?resaciel.eu
