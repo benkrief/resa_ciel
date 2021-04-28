@@ -245,7 +245,7 @@ class OfficeController extends AbstractController
         foreach ($offices as $office){
             $listsubs[$office->getId()]=$this->subRepo->select($office->getId());
             if(isset($listsubs))
-                $listp[$office->getId()]=array("title"=>$office->getTitle(),"lieu"=>$office->getLieu());
+                $listp[$office->getId()]=array("title"=>$office->getTitle(),"lieu"=>$office->getLieu(),"paracha"=>$office->getParacha());
         }
 
         $dateo=[];

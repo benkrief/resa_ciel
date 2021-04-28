@@ -9,7 +9,6 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class OfficeType extends AbstractType
 {
@@ -21,6 +20,7 @@ class OfficeType extends AbstractType
                 'widget' => 'single_text',])
             ->add('hour', TimeType::class,[
                 'widget' => 'single_text' ])
+            ->add('paracha')
             ->add('lieu')
             ->add('maxSub')
         ;
