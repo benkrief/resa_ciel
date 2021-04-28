@@ -12,51 +12,51 @@
                     <div class="table100">
                         <br>
                         <form method="post" action="{{ path('sub_confirm',{'subs': subs }) }}">
-                        {% for key,nb in subs %}
+                            {% for key,nb in subs %}
 
                                 <table class="table" style="background: whitesmoke">
-                                    <thead>
-                                    <tr class="table100-head">
-                                        <th class="column1"><label style="color: yellow">Office</label></th>
-                                        <th class="column2"><label>Nom</label></th>
-                                        <th class="column3"><label>Prénom</label></th>
-                                        <th class="column3"><label>Email</label></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                                <thead>
+                                <tr class="table100-head">
+                                    <th class="column1"><label style="color: yellow">Office</label></th>
+                                    <th class="column2"><label>Nom</label></th>
+                                    <th class="column3"><label>Prénom</label></th>
+                                    <th class="column3"><label>Email</label></th>
+                                </tr>
+                                </thead>
+                                <tbody>
                                 {% for i in 1..nb %}
                                     <tr style="font-size: larger">
-                                        <td class="column1" style="text-transform: capitalize">
+                                        <td class="column1 non" style="text-transform: capitalize">
                                             <label>
-                                               {% for cle,valeur in office %}{% if cle==key%} {{ valeur }} {% endif %}{% endfor %}
+                                                {% for cle,valeur in office %}{% if cle==key%} {{ valeur.title }} - {{ valeur.lieu}} - {{ valeur.date}} {{ valeur.hour? valeur.hour|date('G:i') : ''   }} {% endif %}{% endfor %}
                                             </label>
                                         </td>
-                                        <td class="column2">
+                                        <td class="column2 non">
                                             <label>
-                                                <input name="nom_{{ key }}_{{ i }}" type="text">
+                                                <input name="nom_{{ key }}_{{ i }}" type="text" placeholder="Votre Nom">
                                             </label>
                                         </td>
-                                        <td class="column3">
+                                        <td class="column3 non">
                                             <label>
-                                                <input name="prenom_{{ key }}_{{ i }}" type="text">
+                                                <input name="prenom_{{ key }}_{{ i }}" type="text" placeholder="Votre Prénom">
                                             </label>
                                         </td>
-                                        <td class="column3">
+                                        <td class="column3 non">
                                             <label>
-                                                <input name="email_{{ key }}_{{ i }}" type="email">
+                                                <input name="email_{{ key }}_{{ i }}" type="email" placeholder="Votre Email">
                                             </label>
                                         </td>
                                     </tr>
                                 {% endfor %}
-                                    {% else %}
-                                        <tr>
-                                            <td colspan="6">Pas de reservation séléctionée</td>
-                                        </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6">Pas de reservation séléctionée</td>
+                                </tr>
 
-                                    </tbody>
+                                </tbody>
                                 </table>
 
-                        {% endfor %}
+                            {% endfor %}
 
                             <button class="btn input100" style=" background: black; width: auto;position: fixed;
                             bottom: 5px;font-size: large;margin:10px">
@@ -69,4 +69,5 @@
             </div>
         </div>
     </div>
+    <script>for (let i = 0 ; i<4; i++){document.g}</script>
 {% endblock %}

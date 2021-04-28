@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Office;
+use App\Entity\Sub;
 use App\Form\OfficeType;
 use App\Repository\OfficeRepository;
 use App\Repository\SubRepository;
@@ -217,7 +218,8 @@ class OfficeController extends AbstractController
             foreach ($_POST as $key => $value) {
                 $list[$key] = $this->subRepo->select($key);
             }
-            $this->excel->extract($list);
+            //$this->excel->extract($list);
+            $this->excel->test($list);
         }
         return $this->render('sub/noth.html');
     }
@@ -230,6 +232,47 @@ class OfficeController extends AbstractController
         $this->em->remove($office);
         $this->em->flush();
         return $this->redirectToRoute('office_admin',[
+            'admin'=>$admin
+        ]);
+    }
+
+    /**
+     * @Route("/listsub", name="office_sub",methods={"GET","POST"})
+     */
+    public function sublist():Response
+    {
+       $offices= $this->officeRepo->findAll();
+        foreach ($offices as $office){
+            $listsubs[$office->getId()]=$this->subRepo->select($office->getId());
+            if(isset($listsubs))
+                $listp[$office->getId()]=array("title"=>$office->getTitle(),"lieu"=>$office->getLieu());
+        }
+
+        $dateo=[];
+        foreach ($this->officeRepo->date_office() as $doff){
+            $dateo[$doff["id"]]=array('jour'=>date_format($doff["date"],'N'),'nbjour'=>date_format($doff["date"],'j'));
+        }
+        $date=[];
+        foreach ($dateo as $key=>$d){
+            if ($d["jour"]==1){$j="Lundi";}elseif($d["jour"]==2){$j="Mardi";}elseif($d["jour"]==3){$j="Mercredi";}elseif($d["jour"]==4){$j="Jeudi";}elseif($d["jour"]==5){$j="Vendredi";}elseif($d["jour"]==6){$j="Samedi";}else{$j="Dimanche";}
+            $date[$key]=$j.' '.$d["nbjour"];
+        }
+        return $this->render('office/sublist.html.twig', [
+            'offices' => $listp,
+            'admin'=>$_GET["admin"],
+            'date'=>$date,
+            'subs'=>$listsubs,
+        ]);
+    }
+
+    /**
+     * @Route("/delete/{idOffice}/{idSub}/{admin}", name="office_subremove")
+     */
+    public function subremove(Sub $sub, $admin): Response
+    {
+        $this->em->remove($sub);
+        $this->em->flush();
+        return $this->redirectToRoute('office_sub',[
             'admin'=>$admin
         ]);
     }

@@ -3,12 +3,6 @@
 {% block title %} {{ parent() }}{% endblock %}
 
 {% block body %}
-    <div id="welcome">
-        <h1>Beth Hamidrach - Kol Yaacov</h1>
-    </div>
-    <div id="img">
-    </div>
-    <br><br>
     <div id="sub">
         <h2 class="input100" id="inscr">Inscriptions</h2>
         <br><br>
@@ -29,6 +23,13 @@
                                     Imprimer liste
                                 </a>
                             </button>
+                            <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large;
+                            display: inline; margin-right:5px; margin-bottom: 10px; " >
+                                <a href="{{ path('office_sub', {'admin': admin}) }}">
+                                    Voir les inscrits
+                                </a>
+                            </button>
+
                         {% endif %}
                         <br>
                         <form method="post" action="{{ path('sub') }}">
@@ -58,7 +59,7 @@
                                         <td class="column3">{{ office.title }}</td>
                                         <td class="column4">{{ office.maxSub }}</td>
                                         <td class="column5">{% for cle,valeur in max %}{% if cle==office.id %} {{ valeur }}{% endif %}{% endfor %} </td>
-                                        <td class="column6"><label><input type="number" placeholder="0" name="{{ office.id }}" style="text-align: right;width: 100%;" min="0" max="{% for cle,valeur in max %}{% if cle==office.id %}{{valeur}}{% endif %}{% endfor %}"></label></td>
+                                        <td class="column6"><label style="border: solid black 2px; padding: 2px"><input type="number" placeholder="0" name="{{ office.id }}" style="text-align: right;width: 100%;" min="0" max="{% for cle,valeur in max %}{% if cle==office.id %}{{valeur}}{% endif %}{% endfor %}"></label></td>
                                         {% if admin=="ben" or admin=="ravdayan" %}<td style="text-align: center;">
                                             <a href="{{ path('office_show', {'id': office.id, 'admin':admin }) }}">Detail</a><br>
                                             <a href="{{ path('office_edit', {'id': office.id, 'admin':admin}) }}">Modifier</a><br>

@@ -5,13 +5,13 @@
 {% block body %}
     <div class="valid">
         <h1 style="text-transform: capitalize">
-        Bonjour {{ sub.prenom }} {{ sub.nom }}
+            Bonjour {{ sub.prenom }} {{ sub.nom }}
         </h1>
         <br>
         <p>
-            Votre inscription pour l'office de {{ office.title }} a bien été prise en compte.
+            Votre inscription pour l'office de <label style="text-transform: capitalize"> {{ office.title }} a {{ office.lieu}}</label> a bien été prise en compte.
             <br>
-            Merci de venir à l'heure et respecter les règles sanitaires.
+            Merci de venir à {{ office.hour? office.hour|date('G:i') : ''   }} et de respecter les règles sanitaires 😷
             <br>
             A bientot 👋
         </p>

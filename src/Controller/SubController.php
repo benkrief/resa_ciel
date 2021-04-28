@@ -39,8 +39,11 @@ class SubController extends AbstractController
             $this->session->set("subs",$this->subs);
             $office=[];
 
-            foreach ($this->officeRepo->office() as $off){
-                $office[$off["id"]]=$off["title"];
+            foreach ($this->officeRepo->findAll() as $off){
+                $d["jour"]=date_format($off->getDate(),'N');
+                if ($d["jour"]==1){$j="Lundi";}elseif($d["jour"]==2){$j="Mardi";}elseif($d["jour"]==3){$j="Mercredi";}elseif($d["jour"]==4){$j="Jeudi";}elseif($d["jour"]==5){$j="Vendredi";}elseif($d["jour"]==6){$j="Samedi";}else{$j="Dimanche";}
+
+                $office[$off->getId()]=array("title"=>$off->getTitle(),"lieu"=>$off->getLieu(),"date"=>$j,"hour"=>$off->getHour());
             }
 
 
@@ -58,7 +61,7 @@ class SubController extends AbstractController
     /**
      * @Route("/sub/confirm", name="sub_confirm")
      * @return Response
-    */
+     */
     public function confirm():Response
     {
 
@@ -89,22 +92,22 @@ class SubController extends AbstractController
     public function table(Request $request):Response
     {
 
-        $sub = new Sub();
-        $form = $this->createForm(SubFormType::class,$sub);
-        $form->handleRequest($request);
+    $sub = new Sub();
+    $form = $this->createForm(SubFormType::class,$sub);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($sub);
-            $this->em->flush();
+    if ($form->isSubmitted() && $form->isValid()) {
+    $this->em->persist($sub);
+    $this->em->flush();
 
-            return $this->redirectToRoute('valid_sub',['valid'=>true]);
-        }
+    return $this->redirectToRoute('valid_sub',['valid'=>true]);
+    }
 
-        return $this->render('sub/index.html.twig', [
-            'subs'=>[1=>2,2=>1],
-            'form' => $form->createView(),
+    return $this->render('sub/index.html.twig', [
+    'subs'=>[1=>2,2=>1],
+    'form' => $form->createView(),
 
-        ]);
+    ]);
     }*/
 
     /**
