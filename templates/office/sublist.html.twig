@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}- Liste d'Inscrit{% endblock %}
+
+{% block body %}
+
+    {% for key,nb in offices %}
+
+        <table class="table" style="background: whitesmoke">
+        <thead>
+        <tr class="table100-head">
+            <th class="column1"><label style="color: yellow">Office</label></th>
+            <th class="column1"><label>Lieu</label></th>
+            <th class="column1"><label>Date</label></th>
+            <th class="column2"><label>Nom</label></th>
+            <th class="column3"><label>Prénom</label></th>
+            <th class="column3"><label>Supprimer</label></th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for id,off in subs %}
+                {% if id==key %}
+                    {% for c,i in off %}
+            <tr style="font-size: larger">
+                <td class="column1 non" style="text-transform: capitalize">
+                    <label>
+                      {{ nb.title }}
+                    </label>
+                </td>
+                <td class="column2 non" style="text-transform: capitalize">
+                    <label>
+                       {{ nb.lieu }}
+                    </label>
+                </td>
+                <td class="column3 non" style="text-transform: capitalize">
+                    <label>
+                        {% for cle,valeur in date %}{% if cle==key%} {{ valeur }} {% endif %}{% endfor %}
+                    </label>
+                </td>
+                <td class="column3 non" style="text-transform: capitalize">
+                    <label>
+                        {{ i.nom }}
+                    </label>
+                </td>
+                <td class="column3 non" style="text-transform: capitalize">
+                    <label>
+                        {{ i.prenom }}
+                    </label>
+                </td>
+                <td class="column3 non">
+                    <a href="{{ path('office_subremove', {'idOffice':key,'idSub':c,'admin':admin }) }}">
+                        ❌
+                    </a>
+                </td>
+            </tr>
+                {% endfor %}
+                {% endif %}
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="6">Pas de reservation séléctionée</td>
+        </tr>
+
+        </tbody>
+        </table>
+
+    {% endfor %}
+
+
+
+        <button class="btn input100" style="background: black; width: 160px;z-index: 1;position: fixed;bottom: 5px;
+                          margin-right:5px; margin-bottom: 10px;  " >
+            <a style="font-size: medium;color: white" href="{{ path('office_admin', {'admin':admin }) }}">
+                Revenir aux offices
+            </a>
+        </button>
+
+{% endblock %}

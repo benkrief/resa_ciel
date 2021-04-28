@@ -259,21 +259,26 @@ tbody tr:hover {
     content: "Date";
   }
   table tbody tr td:nth-child(2):before {
-    content: "Order ID";
+    content: "Heure";
   }
   table tbody tr td:nth-child(3):before {
-    content: "Name";
+    content: "Lieu";
   }
   table tbody tr td:nth-child(4):before {
-    content: "Price";
+    content: "Office";
   }
   table tbody tr td:nth-child(5):before {
-    content: "Quantity";
+    content: "Nombres de Places";
   }
   table tbody tr td:nth-child(6):before {
-    content: "Total";
+    content: "Places Restantes";
   }
-
+  table tbody tr td:nth-child(7):before {
+     content: "Vos Places : ";
+   }
+  .non::before{
+      display: none;
+  }
   .column4,
   .column5,
   .column6 {

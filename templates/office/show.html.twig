@@ -7,30 +7,30 @@
 
     <table class="table" style="background: whitesmoke">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ office.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ office.title }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ date }}</td>
-            </tr>
-            <tr>
-                <th>Heure</th>
-                <td>{{ office.hour ? office.hour|date('G:i') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Lieu</th>
-                <td>{{ office.lieu }}</td>
-            </tr>
-            <tr>
-                <th>MaxSub</th>
-                <td>{{ office.maxSub }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ office.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ office.title }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ date }}</td>
+        </tr>
+        <tr>
+            <th>Heure</th>
+            <td>{{ office.hour ? office.hour|date('G:i') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Lieu</th>
+            <td>{{ office.lieu }}</td>
+        </tr>
+        <tr>
+            <th>MaxSub</th>
+            <td>{{ office.maxSub }}</td>
+        </tr>
         </tbody>
     </table>
 
