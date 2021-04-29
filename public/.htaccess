@@ -32,7 +32,7 @@ DirectoryIndex index.php
 
 
     RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://www.resaciel.eu/$1 [L,R=301]
+    RewriteRule ^(.*)$ https://www.resaciel.eu/ [L,R=301]
 
     # Sets the HTTP_AUTHORIZATION header removed by Apache
     RewriteCond %{HTTP:Authorization} .+
