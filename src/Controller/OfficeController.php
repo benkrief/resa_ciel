@@ -101,7 +101,7 @@ class OfficeController extends AbstractController
         $office=$this->officeRepo->findAll();
         $leftmax=[];
         foreach ($office as $off){
-            if(!isset($left))
+            if(!isset($leftmax))
                 $leftmax[$off->getId()]=0;
             else
                 $leftmax[$off->getId()]=$off->getMaxSub()-($this->subRepo->list($off->getId()));
@@ -119,7 +119,6 @@ class OfficeController extends AbstractController
         }
         return $this->render('office/index.html.twig', [
             'offices'=>$office,
-            'leftplace'=>$left,
             'admin'=>$admin,
             'dateo'=>$date,
             'max'=>$leftmax,

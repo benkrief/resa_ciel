@@ -265,15 +265,18 @@ tbody tr:hover {
     content: "Lieu";
   }
   table tbody tr td:nth-child(4):before {
-    content: "Office";
+    content: "Paracha";
   }
   table tbody tr td:nth-child(5):before {
-    content: "Nombres de Places";
+    content: "Office";
   }
   table tbody tr td:nth-child(6):before {
-    content: "Places Restantes";
+    content: "Nombres de Places";
   }
   table tbody tr td:nth-child(7):before {
+    content: "Places Restantes";
+  }
+  table tbody tr td:nth-child(8):before {
      content: "Vos Places : ";
    }
   .non::before{

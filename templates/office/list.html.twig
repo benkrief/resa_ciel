@@ -19,10 +19,10 @@
 
             {% for office in offices %}
                 <tr style="font-size: larger; text-transform: capitalize">
-                    <td class="column1" style="text-transform: capitalize">{% for cle,valeur in date %}{% if cle==office.id%} {{ valeur }} {% endif %}{% endfor %}</td>
-                    <td class="column2">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
-                    <td class="column3">{{ office.paracha }}</td>
-                    <td class="column1">{{ office.lieu }}</td>
+                    <td class="column3" style="text-transform: capitalize; width:20%;">{% for cle,valeur in date %}{% if cle==office.id%} {{ valeur }} {% endif %}{% endfor %}</td>
+                    <td class="column2" style="text-transform: capitalize; width:10%;">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
+                    <td class="column3" style="text-transform: capitalize; width:20%;">{{ office.paracha }}</td>
+                    <td class="column3" style="text-transform: capitalize; width:20%;">{{ office.lieu }}</td>
                     <td class="column3">{{ office.title }}</td>
                     <td class="column3"><label><input type="checkbox" name="{{ office.id }}"></label></td>
                 </tr>

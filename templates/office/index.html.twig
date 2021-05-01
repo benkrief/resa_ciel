@@ -52,12 +52,12 @@
                                 {% for office in offices %}
 
                                     <tr style="font-size: larger">
-                                        <td class="column1" style="text-transform: capitalize"><label>
+                                        <td class="column3" style="text-transform: capitalize; width:20%;"><label>
                                                 {% for cle,valeur in dateo %}{% if cle==office.id%} {{ valeur }} {% endif %}{% endfor %}
                                             </label></td>
-                                        <td class="column2">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
-                                        <td class="column3">{{ office.paracha }}</td>
-                                        <td class="column3">{{ office.lieu }}</td>
+                                        <td class="column2"style="text-transform: capitalize; width:10%;">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
+                                        <td class="column3" style="text-transform: capitalize; width:20%;">{{ office.paracha }}</td>
+                                        <td class="column3" style="text-transform: capitalize; width:20%;">{{ office.lieu }}</td>
                                         <td class="column3">{{ office.title }}</td>
                                         <td class="column4">{{ office.maxSub }}</td>
                                         <td class="column5">{% for cle,valeur in max %}{% if cle==office.id %} {{ valeur }}{% endif %}{% endfor %} </td>
@@ -75,7 +75,9 @@
                                 {% endfor %}
                             </tbody>
                         </table>
-                        <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large; position: relative;margin: auto" ><input type="submit" style="background: whitesmoke;" value="Reservez"></button>
+                        <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large; position: relative;margin: auto" >
+                            <input type="submit" style="background: whitesmoke;" value="Reservez">
+                        </button>
                         </form>
 
                     </div>
