@@ -4,46 +4,55 @@
 
 {% block body %}
     <div id="sub">
-        <h2 class="input100" id="inscr">Reservations</h2>
+        <h2 class="card-body clearfix" style="text-align: center;
+    color: whitesmoke;
+    margin-top: 10px;
+    border: 3px outset #FFFFFF;
+    border-radius: 27px;
+    background: #2B304D;
+    width: fit-content;
+    font-size: xxx-large;
+    margin-left: auto;
+    margin-right: auto;">Reservation</h2>
         <br><br>
-        <div class="limiter">
-            <div class="container-table100">
-                <div class="wrap-table100">
-                    <div class="table100">
-                        <br>
+        <div class="no-padding    container-fixed-lg bg-white">
+            <div class="container">
+                <div class="card card-transparent">
+                    <div class="card-body">
+                        <div class="table-responsive">
                         <form method="post" action="{{ path('sub_confirm',{'subs': subs }) }}">
                             {% for key,nb in subs %}
 
-                                <table class="table" style="background: whitesmoke">
+                                <table class="table table-hover" id="basicTable"  style="background: whitesmoke">
                                 <thead>
-                                <tr class="table100-head">
-                                    <th class="column1"><label style="color: yellow">Office</label></th>
-                                    <th class="column2"><label>Nom</label></th>
-                                    <th class="column2"><label>Prénom</label></th>
-                                    <th class="column3"><label>Email</label></th>
+                                <tr>
+                                    <th style="width:20%"><label>Office</label></th>
+                                    <th style="width:20%"><label>Nom</label></th>
+                                    <th style="width:20%"><label>Prénom</label></th>
+                                    <th style="width:20%"><label>Email</label></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for i in 1..nb %}
                                     <tr style="font-size: larger">
-                                        <td class="column1 non" style="text-transform: capitalize">
+                                        <td class="v-align-middle" style="text-transform: capitalize">
                                             <label>
                                                 {% for cle,valeur in office %}{% if cle==key%} {{ valeur.title }} - {{ valeur.lieu}} - {{ valeur.date}} {{ valeur.hour? valeur.hour|date('G:i') : ''   }} {% endif %}{% endfor %}
                                             </label>
                                         </td>
-                                        <td class="column2 non">
-                                            <label style="border: 4px inset rgba(68,68,68,0.56); padding: 4px;">
-                                                <input name="nom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Nom" style="width: 100%;">
+                                        <td class="v-align-middle">
+                                            <label class="no-padding no-margin" style="border: 4px inset rgba(68,68,68,0.56); padding: 4px;">
+                                                <input name="nom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Nom" >
                                             </label>
                                         </td>
-                                        <td class="column3 non">
-                                            <label style="border: 4px inset rgba(68,68,68,0.56); padding: 2px;">
-                                                <input name="prenom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Prénom"  style="width: 100%;">
+                                        <td class="v-align-middle">
+                                            <label class="no-padding no-margin" style="border: 4px inset rgba(68,68,68,0.56); padding: 2px;">
+                                                <input name="prenom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Prénom" >
                                             </label>
                                         </td>
-                                        <td class="column3 non">
-                                            <label style="border: 4px inset rgba(68,68,68,0.56); padding: 2px;">
-                                                <input name="email_{{ key }}_{{ i }}"  type="email"  placeholder="Votre Email"  style="width: 100%;">
+                                        <td class="v-align-middle">
+                                            <label class="no-padding no-margin" style="border: 4px inset rgba(68,68,68,0.56); padding: 2px;">
+                                                <input name="email_{{ key }}_{{ i }}"  type="email"  placeholder="Votre Email" >
                                             </label>
                                         </td>
 
@@ -51,16 +60,16 @@
                                 {% endfor %}
                             {% else %}
                                 <tr>
-                                    <td colspan="6">Pas de reservation séléctionée</td>
+                                    <td  class="v-align-middle" colspan="6">Pas de reservation séléctionée</td>
                                 </tr>
                                 </tbody>
                                 </table>
                             {% endfor %}
 
-                            <button class="btn input100" style=" background: black; width: auto;position: fixed;
-                            bottom: 5px;font-size: large;margin:10px">
-                                <input style="color:whitesmoke; background: black" type="submit" name="confirm" value="Valider">
-                            </button>
+
+                                <input class="btn btn-outline-primary" style="color:whitesmoke; background: black;position: fixed;
+                            bottom: 5px;font-size: large;margin:10px" type="submit" name="confirm" value="Valider">
+
                         </form>
 
                     </div>

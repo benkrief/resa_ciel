@@ -4,85 +4,120 @@
 
 {% block body %}
     <div id="sub">
-        <h2 class="input100" id="inscr">Inscriptions</h2>
+        <h2 class="card-body clearfix" style="text-align: center;
+    color: whitesmoke;
+    margin-top: 10px;
+    border: 3px outset #FFFFFF;
+    border-radius: 27px;
+    background: #2B304D;
+    width: fit-content;
+    font-size: xxx-large;
+    margin-left: auto;
+    margin-right: auto;">Inscriptions</h2>
         <br><br>
-        <div class="limiter">
-            <div class="container-table100">
-                <div class="wrap-table100">
-                    <div class="table100">
-                        {% if admin=="ben" or admin=="ravdayan" %}
-                            <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large;
-                            display: inline; margin-right:5px; margin-bottom: 10px;  " >
-                                <a href="{{ path('office_new', {'admin': admin}) }}">
-                                    Ajouter un office
-                                </a>
-                            </button>
-                            <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large;
-                            display: inline; margin-right:5px; margin-bottom: 10px; " >
-                                <a href="{{ path('office_list', {'admin': admin}) }}">
-                                    Imprimer liste
-                                </a>
-                            </button>
-                            <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large;
-                            display: inline; margin-right:5px; margin-bottom: 10px; " >
-                                <a href="{{ path('office_sub', {'admin': admin}) }}">
-                                    Voir les inscrits
-                                </a>
-                            </button>
+        <div class="no-padding    container-fixed-lg bg-white">
+            <div class="container">
+                <div class="card card-transparent">
+                    <div class="card-header ">
+                        <div class="card-title">
 
-                        {% endif %}
+                            {% if admin=="ben" or admin=="ravdayan" %}
+                                <button class="btn btn-complete" style="color:white;font-size: large;
+                                display: inline; margin-right:5px; margin-bottom: 10px;  " >
+                                    <a style="opacity: 1;" href="{{ path('office_new', {'admin': admin}) }}">
+                                        Ajouter un office
+                                    </a>
+                                </button>
+                                <button class="btn btn-complete" style="color:white; width: auto; font-size: large;
+                                display: inline; margin-right:5px; margin-bottom: 10px; " >
+                                    <a style="opacity: 1;" href="{{ path('office_list', {'admin': admin}) }}">
+                                        Imprimer liste
+                                    </a>
+                                </button>
+                                <button class="btn btn-complete" style="color:white; width: auto; font-size: large;
+                                display: inline; margin-right:5px; margin-bottom: 10px; " >
+                                    <a  style="opacity: 1;" href="{{ path('office_sub', {'admin': admin}) }}">
+                                        Voir les inscrits
+                                    </a>
+                                </button>
+
+                            {% endif %}
+                        </div>
                         <br>
-                        <form method="post" action="{{ path('sub') }}">
-                            <table class="table" style="background: whitesmoke">
-                                <thead>
-                                <tr class="table100-head">
-                                    <th class="column1">Date</th>
-                                    <th class="column2">Heure</th>
-                                    <th class="column1">Paracha</th>
-                                    <th class="column1">Lieu</th>
-                                    <th class="column3">Office</th>
-                                    <th class="column4">Nombres de places</th>
-                                    <th class="column5">Places Restantes</th>
-                                    <th class="column6">Vos places</th>
-                                    {% if admin=="ben" or admin=="ravdayan" %}<th class="column5">Action</th>{% endif %}
-                                </tr>
-                                </thead>
-                                <tbody>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <form method="post" action="{{ path('sub') }}">
+                                <table class="table table-hover" id="basicTable" style="background: whitesmoke">
+                                    <thead>
+                                        <tr>
+                                            <th style="width:20%">Date</th>
+                                            <th style="width:20%">Heure</th>
+                                            <th style="width:20%">Paracha</th>
+                                            <th style="width:20%">Lieu</th>
+                                            <th style="width:20%">Office</th>
+                                            <th style="width:20%">Nombres de places</th>
+                                            <th style="width:20%">Places Restantes</th>
+                                            <th style="width:20%">Vos places</th>
+                                            {% if admin=="ben" or admin=="ravdayan" %}<th style="width:20%">Action</th>{% endif %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                {% for office in offices %}
+                                        {% for office in offices %}
 
-                                    <tr style="font-size: larger">
-                                        <td class="column3" style="text-transform: capitalize; width:20%;"><label>
-                                                {% for cle,valeur in dateo %}{% if cle==office.id%} {{ valeur }} {% endif %}{% endfor %}
-                                            </label></td>
-                                        <td class="column2"style="text-transform: capitalize; width:10%;">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
-                                        <td class="column3" style="text-transform: capitalize; width:20%;">{{ office.paracha }}</td>
-                                        <td class="column3" style="text-transform: capitalize; width:20%;">{{ office.lieu }}</td>
-                                        <td class="column3">{{ office.title }}</td>
-                                        <td class="column4">{{ office.maxSub }}</td>
-                                        <td class="column5">{% for cle,valeur in max %}{% if cle==office.id %} {{ valeur }}{% endif %}{% endfor %} </td>
-                                        <td class="column6"><label style="border: solid black 2px; padding: 2px"><input type="number" placeholder="0" name="{{ office.id }}" style="text-align: right;width: 100%;" min="0" max="{% for cle,valeur in max %}{% if cle==office.id %}{{valeur}}{% endif %}{% endfor %}"></label></td>
-                                        {% if admin=="ben" or admin=="ravdayan" %}<td style="text-align: center;">
-                                            <a href="{{ path('office_show', {'id': office.id, 'admin':admin }) }}">Detail</a><br>
-                                            <a href="{{ path('office_edit', {'id': office.id, 'admin':admin}) }}">Modifier</a><br>
-                                            <a href="{{ path('office_delete', {'id': office.id, 'admin':admin}) }}">Supprimer</a>
-                                            </td>{% endif %}
-                                    </tr>
-                                {% else %}
-                                    <tr>
-                                        <td colspan="6">Pas d'office</td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                            <button class="btn input100" style="background: whitesmoke; width: auto; font-size: large; position: relative;margin: auto" ><input type="submit" style="background: whitesmoke;" value="Reservez"></button>
-                        </form>
+                                            <tr style="font-size: larger">
+                                                <td class="v-align-middle"><label class="no-padding no-margin">
+                                                        {% for cle,valeur in dateo %}{% if cle==office.id%} {{ valeur }} {% endif %}{% endfor %}
+                                                    </label></td>
+                                                <td class="v-align-middle">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
+                                                <td class="v-align-middle">{{ office.paracha }}</td>
+                                                <td class="v-align-middle">{{ office.lieu }}</td>
+                                                <td class="v-align-middle">{{ office.title }}</td>
+                                                <td class="v-align-middle">{{ office.maxSub }}</td>
+                                                <td class="v-align-middle">{% for cle,valeur in max %}{% if cle==office.id %} {{ valeur }}{% endif %}{% endfor %} </td>
+                                                <td class="v-align-middle">
+                                                    <label class="no-padding no-margin" style="border: solid black 2px; padding: 2px">
+                                                        <input type="number" placeholder="0" name="{{ office.id }}" style="text-align: right;" min="0" max="{% for cle,valeur in max %}{% if cle==office.id %}{{valeur}}{% endif %}{% endfor %}">
+                                                    </label>
+                                                </td>
+                                                {% if admin=="ben" or admin=="ravdayan" %}<td class="v-align-middle">
+                                                    <a href="{{ path('office_show', {'id': office.id, 'admin':admin }) }}">Detail</a><br>
+                                                    <a href="{{ path('office_edit', {'id': office.id, 'admin':admin}) }}">Modifier</a><br>
+                                                    <a href="{{ path('office_delete', {'id': office.id, 'admin':admin}) }}">Supprimer</a>
+                                                </td>{% endif %}
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td class="v-align-middle"  colspan="6">Pas d'office</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
 
+                                    <input type="submit" class="btn btn-outline-primary" style="font-size: large; position: relative;margin: auto;margin-top: 10px" value="Reservez">
+
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <div class="login-container bg-white">
+
+            <div class="pull-bottom sm-pull-bottom">
+                <div class="m-b-30 p-r-80 sm-m-t-20 sm-p-r-15 sm-p-b-20 clearfix">
+                    <div class="col-sm-9 no-padding m-t-10">
+                        
+                    </div>
+                </div>
+            </div>
+
+    </div>
 
 
 {% endblock %}
+
