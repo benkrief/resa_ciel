@@ -16,14 +16,14 @@
     margin-right: auto;">Reservation</h2>
         <br><br>
         <div class="no-padding    container-fixed-lg bg-white">
-            <div class="container">
+            <div class="container" style="box-sizing: content-box">
                 <div class="card card-transparent">
                     <div class="card-body">
                         <div class="table-responsive">
                         <form method="post" action="{{ path('sub_confirm',{'subs': subs }) }}">
                             {% for key,nb in subs %}
 
-                                <table class="table table-hover" id="basicTable"  style="background: whitesmoke">
+                                <table class="table table-hover non" id="basicTable"  style="background: whitesmoke">
                                 <thead>
                                 <tr>
                                     <th style="width:20%"><label>Office</label></th>
