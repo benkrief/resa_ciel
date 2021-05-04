@@ -1,13 +1,10 @@
-
-{% block title %} Confirmation d'inscription Ciel {% endblock %}
-
 {% block body %}
     <div class="valid">
-        <h2 style="text-transform: capitalize">
+        <h3 style="text-transform: capitalize">
             Bonjour {{ sub.prenom }} {{ sub.nom }}
-        </h2>
+        </h3>
         <p>
-            Votre inscription pour l'office de <label style="text-transform: capitalize"> {{ office.title }}</label> {% if office.lieu == ahalim%} à {% else%}au {% endif%} <label style="text-transform: capitalize"> {{ office.lieu}}</label> a bien été prise en compte.
+            Votre inscription pour l'office de <label style="text-transform: capitalize"> {{ office.title }}</label> {% if office.lieu == Ahalim %} à {% else%}au {% endif%} <label style="text-transform: capitalize"> {{ office.lieu}}</label> a bien été prise en compte.
             <br>
             Merci de venir à {{ office.hour? office.hour|date('G:i') : ''   }} et de respecter les règles sanitaires 😷
             <br>
