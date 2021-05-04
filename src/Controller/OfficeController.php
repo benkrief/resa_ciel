@@ -230,11 +230,11 @@ class OfficeController extends AbstractController
      */
     public function sublist():Response
     {
-       $offices= $this->officeRepo->findAll();
+        $offices= $this->officeRepo->findAll();
         foreach ($offices as $office){
             $listsubs[$office->getId()]=$this->subRepo->select($office->getId());
             if(isset($listsubs))
-                $listp[$office->getId()]=array("title"=>$office->getTitle(),"paracha"=>$office->getParacha(),"lieu"=>$office->getLieu());
+                $listp[$office->getId()]=array("title"=>$office->getTitle(),"hour"=>$office->getHour(),"paracha"=>$office->getParacha(),"lieu"=>$office->getLieu());
         }
 
         $dateo=[];
