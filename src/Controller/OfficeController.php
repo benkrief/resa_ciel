@@ -246,6 +246,7 @@ class OfficeController extends AbstractController
             if ($d["jour"]==1){$j="Lundi";}elseif($d["jour"]==2){$j="Mardi";}elseif($d["jour"]==3){$j="Mercredi";}elseif($d["jour"]==4){$j="Jeudi";}elseif($d["jour"]==5){$j="Vendredi";}elseif($d["jour"]==6){$j="Samedi";}else{$j="Dimanche";}
             $date[$key]=$j.' '.$d["nbjour"];
         }
+
         return $this->render('office/sublist.html.twig', [
             'offices' => $listp,
             'admin'=>$_GET["admin"],
