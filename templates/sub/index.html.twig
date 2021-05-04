@@ -4,7 +4,7 @@
 
 {% block body %}
     <div id="sub">
-        <h2 class="card-body clearfix" style="text-align: center;
+    <h2 class="card-body clearfix" style="text-align: center;
     color: whitesmoke;
     margin-top: 10px;
     border: 3px outset #FFFFFF;
@@ -14,66 +14,72 @@
     font-size: xxx-large;
     margin-left: auto;
     margin-right: auto;">Reservation</h2>
-        <br><br>
-        <div class="no-padding    container-fixed-lg bg-white">
-            <div class="container" style="box-sizing: content-box">
-                <div class="card card-transparent">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                        <form method="post" action="{{ path('sub_confirm',{'subs': subs }) }}">
-                            {% for key,nb in subs %}
+    <br><br>
+    <div class="no-padding    container-fixed-lg bg-white">
+    <div class="container" style="box-sizing: content-box">
+        <div class="card card-transparent">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <form method="post" action="{{ path('sub_confirm',{'subs': subs }) }}">
+                        {% for key,nb in subs %}
 
-                                <table class="table table-hover non" id="basicTable"  style="background: whitesmoke">
-                                <thead>
-                                <tr>
-                                    <th style="width:20%"><label>Office</label></th>
-                                    <th style="width:20%"><label>Nom</label></th>
-                                    <th style="width:20%"><label>Prénom</label></th>
-                                    <th style="width:20%"><label>Email</label></th>
+                        <table class="table table-hover non" id="basicTable"  style="background: whitesmoke">
+                            <thead>
+                            <tr>
+                                <th style="width:20%"><label>Office</label></th>
+                                <th style="width:20%"><label>Nom</label></th>
+                                <th style="width:20%"><label>Prénom</label></th>
+                                <th style="width:20%"><label>Email</label></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for i in 1..nb %}
+                                <tr style="font-size: larger">
+                                    <td class="v-align-middle" style="text-transform: capitalize">
+                                        <label>
+                                            {% for cle,valeur in office %}{% if cle==key%} {{ valeur.title }} - {{ valeur.lieu}} - {{ valeur.date}} {{ valeur.hour? valeur.hour|date('G:i') : ''   }} {% endif %}{% endfor %}
+                                        </label>
+                                    </td>
+                                    <td class="v-align-middle">
+                                        <label class="no-padding no-margin" style="border: 4px inset rgba(68,68,68,0.56); padding: 4px;">
+                                            <input name="nom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Nom" style="width: 10em" >
+                                        </label>
+                                    </td>
+                                    <td class="v-align-middle">
+                                        <label class="no-padding no-margin" style="border: 4px inset rgba(68,68,68,0.56); padding: 2px;">
+                                            <input name="prenom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Prénom" style="width: 10em" >
+                                        </label>
+                                    </td>
+                                    <td class="v-align-middle">
+                                        <label class="no-padding no-margin" style="border: 4px inset rgba(68,68,68,0.56); padding: 2px;">
+                                            <input name="email_{{ key }}_{{ i }}"  type="email"  placeholder="Votre Email" >
+                                        </label>
+                                    </td>
+
                                 </tr>
-                                </thead>
-                                <tbody>
-                                {% for i in 1..nb %}
-                                    <tr style="font-size: larger">
-                                        <td class="v-align-middle" style="text-transform: capitalize">
-                                            <label>
-                                                {% for cle,valeur in office %}{% if cle==key%} {{ valeur.title }} - {{ valeur.lieu}} - {{ valeur.date}} {{ valeur.hour? valeur.hour|date('G:i') : ''   }} {% endif %}{% endfor %}
-                                            </label>
-                                        </td>
-                                        <td class="v-align-middle">
-                                            <label class="no-padding no-margin" style="border: 4px inset rgba(68,68,68,0.56); padding: 4px;">
-                                                <input name="nom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Nom" >
-                                            </label>
-                                        </td>
-                                        <td class="v-align-middle">
-                                            <label class="no-padding no-margin" style="border: 4px inset rgba(68,68,68,0.56); padding: 2px;">
-                                                <input name="prenom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Prénom" >
-                                            </label>
-                                        </td>
-                                        <td class="v-align-middle">
-                                            <label class="no-padding no-margin" style="border: 4px inset rgba(68,68,68,0.56); padding: 2px;">
-                                                <input name="email_{{ key }}_{{ i }}"  type="email"  placeholder="Votre Email" >
-                                            </label>
-                                        </td>
+                            {% endfor %}
 
-                                    </tr>
-                                {% endfor %}
                             {% else %}
                                 <tr>
                                     <td  class="v-align-middle" colspan="6">Pas de reservation séléctionée</td>
                                 </tr>
-                                </tbody>
-                                </table>
                             {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <div style=" margin:10px">
+                            <label style="color:whitesmoke; font-size: large;">
+                                <input class="btn btn-outline-primary" type="submit" name="confirm" value="Valider">
+                            </label>
+                        </div>
 
 
-                                <input class="btn btn-outline-primary" style="color:whitesmoke; background: black;position: fixed;
-                            bottom: 5px;font-size: large;margin:10px" type="submit" name="confirm" value="Valider">
 
-                        </form>
 
-                    </div>
+                    </form>
+
                 </div>
+            </div>
         </div>
     </div>
 {% endblock %}
