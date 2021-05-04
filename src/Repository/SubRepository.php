@@ -25,6 +25,7 @@ class SubRepository extends ServiceEntityRepository
             ->select('s.nom','s.prenom')
             ->where('s.idOffice = :id')
             ->setParameter(':id', $id)
+            ->orderBy('s.nom')
             ->getQuery()
             ->getResult();
     }
