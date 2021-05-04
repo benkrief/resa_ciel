@@ -42,12 +42,12 @@
                                         </td>
                                         <td class="v-align-middle">
                                             <label class="no-padding no-margin" style="border: 4px inset rgba(68,68,68,0.56); padding: 4px;">
-                                                <input name="nom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Nom" >
+                                                <input name="nom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Nom" style="width: 10em" >
                                             </label>
                                         </td>
                                         <td class="v-align-middle">
                                             <label class="no-padding no-margin" style="border: 4px inset rgba(68,68,68,0.56); padding: 2px;">
-                                                <input name="prenom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Prénom" >
+                                                <input name="prenom_{{ key }}_{{ i }}" type="text"  placeholder="Votre Prénom" style="width: 10em" >
                                             </label>
                                         </td>
                                         <td class="v-align-middle">
@@ -58,17 +58,23 @@
 
                                     </tr>
                                 {% endfor %}
+
                             {% else %}
                                 <tr>
                                     <td  class="v-align-middle" colspan="6">Pas de reservation séléctionée</td>
                                 </tr>
+                                {% endfor %}
                                 </tbody>
                                 </table>
-                            {% endfor %}
+
+                                <div style=" margin:10px">
+                                    <label style="color:whitesmoke; font-size: large;">
+                                        <input class="btn btn-outline-primary" type="submit" name="confirm" value="Valider">
+                                    </label>
+                                </div>
 
 
-                                <input class="btn btn-outline-primary" style="color:whitesmoke; background: black;position: fixed;
-                            bottom: 5px;font-size: large;margin:10px" type="submit" name="confirm" value="Valider">
+
 
                         </form>
 
