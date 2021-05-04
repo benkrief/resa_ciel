@@ -256,7 +256,7 @@ class OfficeController extends AbstractController
     }
 
     /**
-     * @Route("/delete/{idOffice}/{idSub}/{admin}", name="office_subremove")
+     * @Route("/delete_sub/{id}/{admin}", name="sub_delete")
      */
     public function subremove(Sub $sub, $admin): Response
     {
