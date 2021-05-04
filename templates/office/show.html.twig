@@ -38,10 +38,21 @@
         </tbody>
     </table>
 
-    <button class="btn input100" style="background: whitesmoke; width: auto; margin-right: 5px; font-size: large" ><a href="{{ path('office_admin', {'admin':admin }) }}">Revenir aux offices</a></button>
+    <button class="btn btn-outline-primary" style="font-size: large; position: relative;margin: auto;margin-top: 10px" >
+        <a style="font-size: medium; opacity: inherit" href="{{ path('office_admin', {'admin':admin }) }}">
+            Revenir aux offices
+        </a>
+    </button>
+    <button class="btn btn-outline-primary" style="font-size: large; position: relative;margin: auto;margin-top: 10px" >
+        <a style="font-size: medium; opacity: inherit" href="{{ path('office_edit', {'id': office.id, 'admin':admin }) }}">
+            Modifier
+        </a>
+    </button>
+    <button class="btn btn-outline-primary" style="font-size: large; position: relative;margin: auto;margin-top: 10px" >
+        <a style="font-size: medium; opacity: inherit" href="{{ path('office_delete', {'id': office.id, 'admin':admin }) }}">
+            Supprimer
+        </a>
+    </button>
 
-    <button class="btn input100" style="background: whitesmoke; width: auto; margin-right: 5px; font-size: large"><a href="{{ path('office_edit', {'id': office.id, 'admin':admin }) }}">Modifer</a></button>
-
-    <button class="btn input100" style="background: whitesmoke; width: auto; margin-right: 5px; font-size: large"><a href="{{ path('office_delete', {'id': office.id, 'admin':admin }) }}">Supprimer</a></button>
 
 {% endblock %}

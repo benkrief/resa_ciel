@@ -4,44 +4,56 @@
 
 {% block body %}
 
-    <div>
-        <div class="wrap-contact100">
-                {{ form_start(form, {'attr':{'class':'contact100-form validate-form'}}) }}
-                <label class="label-input100" for="title">Office : </label>
-                <div class="wrap-input100 rs1 validate-input">
-                  {{ form_widget(form.title,{'attr':{'class':'input100'}}) }}
-                </div>
-                <label class="label-input100" for="date">Date : </label>
-                <div class="wrap-input100 rs1 validate-input">
-                    {{ form_widget(form.date,{'attr':{'class':'input100'}}) }}
-                </div>
-                <label class="label-input100" for="heure">Heure : </label>
-                <div class="wrap-input100 rs1 validate-input">
-                    {{ form_widget(form.hour,{'attr':{'class':'input100'}}) }}
-                </div>
-                <label class="label-input100" for="paracha">Paracha : </label>
-                <div class="wrap-input100 rs1 validate-input">
-                    {{ form_widget(form.paracha,{'attr':{'class':'input100'}}) }}
-                </div>
-                <label class="label-input100" for="lieu">Lieu : </label>
-                <div class="wrap-input100 rs1 validate-input">
-                    {{ form_widget(form.lieu,{'attr':{'class':'input100'}}) }}
-                </div>
-                <label class="label-input100" for="placemax">Place Max : </label>
-                <div class="wrap-input100 rs1 validate-input">
-                    {{ form_widget(form.maxSub,{'attr':{'class':'input100'}}) }}
-                </div>
+    <div class="no-padding    container-fixed-lg bg-white">
+        <div class="container" style="box-sizing: content-box">
+            <div class="card card-transparent">
+                <div class="card-header ">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <h1 style="font-family: Raleway-SemiBold; color: #555555;line-height: 1.5;width: 100%;padding-bottom: 11px;text-align: center">Ajouter un office</h1>
+                            {{ form_start(form, {'attr':{'class':''}}) }}
+
+                            <div class="form-group form-group-default">
+                                <label for="title">Office : </label>
+                                {{ form_widget(form.title,{'attr':{'class':'input100'}}) }}
+                            </div>
+
+                            <div class="form-group form-group-default">
+                                <label  for="date">Date : </label>
+                                {{ form_widget(form.date,{'attr':{'class':'input100'}}) }}
+                            </div>
+
+                            <div class="form-group form-group-default">
+                                <label  for="heure">Heure : </label>
+                                {{ form_widget(form.hour,{'attr':{'class':'input100'}}) }}
+                            </div>
+
+                            <div class="form-group form-group-default">
+                                <label  for="paracha">Paracha : </label>
+                                {{ form_widget(form.paracha,{'attr':{'class':'input100'}}) }}
+                            </div>
+
+                            <div class="form-group form-group-default">
+                                <label  for="lieu">Lieu : </label>
+                                {{ form_widget(form.lieu,{'attr':{'class':'input100'}}) }}
+                            </div>
+
+                            <div class="form-group form-group-default">
+                                <label for="placemax">Place Max : </label>
+                                {{ form_widget(form.maxSub,{'attr':{'class':'input100'}}) }}
+                            </div>
 
 
-                <div class="container-contact100-form-btn">
-                    <button class="contact100-form-btn">
-						<span>
-							<i class="zmdi zmdi-arrow-right m-l-8"></i>
-						</span>
-                    </button>
-                </div>
-                {{ form_end(form) }}
+                            <button class="btn btn-outline-primary" style="font-size: large; position: relative;margin: auto;margin-top: 10px" >
+                                Ajouter
+                            </button>
+                            {{ form_end(form) }}
 
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

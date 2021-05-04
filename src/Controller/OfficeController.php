@@ -38,14 +38,10 @@ class OfficeController extends AbstractController
     public function index(): Response
     {
         $office=$this->officeRepo->findAll();
+
+        $leftmax=[];
         foreach ($office as $off){
-            if(!isset($left))
-                $left[$off->getId()]=0;
-            else
-                $left[$off->getId()]=$this->subRepo->list($off->getId());
-        }
-        foreach ($office as $off){
-            if(!isset($left))
+            if(!isset($leftmax))
                 $leftmax[$off->getId()]=0;
             else
                 $leftmax[$off->getId()]=$off->getMaxSub()-($this->subRepo->list($off->getId()));
@@ -66,7 +62,6 @@ class OfficeController extends AbstractController
 
         return $this->render('office/index.html.twig', [
             'offices'=>$office,
-            'leftplace'=>$left,
             'admin'=>false,
             "dateo"=>$date,
             "max"=>$leftmax,
@@ -104,14 +99,9 @@ class OfficeController extends AbstractController
     public function admin(string $admin):Response
     {
         $office=$this->officeRepo->findAll();
+        $leftmax=[];
         foreach ($office as $off){
-            if(!isset($left))
-                $left[$off->getId()]=0;
-            else
-                $left[$off->getId()]=$this->subRepo->list($off->getId());
-        }
-        foreach ($office as $off){
-            if(!isset($left))
+            if(!isset($leftmax))
                 $leftmax[$off->getId()]=0;
             else
                 $leftmax[$off->getId()]=$off->getMaxSub()-($this->subRepo->list($off->getId()));
@@ -129,7 +119,6 @@ class OfficeController extends AbstractController
         }
         return $this->render('office/index.html.twig', [
             'offices'=>$office,
-            'leftplace'=>$left,
             'admin'=>$admin,
             'dateo'=>$date,
             'max'=>$leftmax,
@@ -245,7 +234,7 @@ class OfficeController extends AbstractController
         foreach ($offices as $office){
             $listsubs[$office->getId()]=$this->subRepo->select($office->getId());
             if(isset($listsubs))
-                $listp[$office->getId()]=array("title"=>$office->getTitle(),"lieu"=>$office->getLieu(),"paracha"=>$office->getParacha());
+                $listp[$office->getId()]=array("title"=>$office->getTitle(),"paracha"=>$office->getParacha(),"lieu"=>$office->getLieu());
         }
 
         $dateo=[];
