@@ -114,7 +114,13 @@ namespace App\Service;
                     $cel=$worksheet->mergeCells($alpha[$i].($l+1).':'.$alpha[$i+4].($l+1));
                     $cel->setCellValue($alpha[$i].($l+1),$this->minianb($pers));
                     if ($l<10){$l=10;}
-                    $spreadsheet->getActiveSheet()->getStyle($alpha[$i+5].'1:'.$alpha[$i+5].$l)->getFill()->setFillType(Fill::FILL_PATTERN_DARKGRAY);
+                    $spreadsheet->getActiveSheet()->getStyle($alpha[$i+5].'1:'.$alpha[$i+5].$l)->applyFromArray(['fill' => [
+                        'fillType' => Fill::FILL_SOLID,
+                        'startColor' => [
+                            'rgb' => '808080',
+                        ],
+
+                    ],]);
 
                 $spreadsheet->getActiveSheet()->getStyle($alpha[$i].'1:'.$alpha[$i+4].'1')->applyFromArray($styleArray);
 
@@ -126,37 +132,9 @@ namespace App\Service;
     }
 
     public function minian(int $i):array{
-        if($i>9){
-            return [
-                'font' => [
-                    'bold' => true,
-                ],
-                'borders' => [
-                    'top' => [
-                        'borderStyle' => Border::BORDER_MEDIUM,
-                    ],
-                    'bottom' => [
-                        'borderStyle' => Border::BORDER_MEDIUM,
-                    ],
-                    'right' => [
-                        'borderStyle' => Border::BORDER_MEDIUM,
-                    ],
-                    'left' => [
-                        'borderStyle' => Border::BORDER_MEDIUM,
-                    ],
-                ],
-                'fill' => [
-                    'fillType' => Fill::FILL_SOLID,
-                    'startColor' => [
-                        'argb' => '#00dd00',
-                    ],
-                    'endColor' => [
-                        'argb' => '#00dd00',
-                    ],
-                ],
-            ];
-        }
-        else {return
+        if($i<9)
+        {
+            return
             [
                 'font' => [
                     'bold' => true,
@@ -186,12 +164,14 @@ namespace App\Service;
                 ],
             ];
         }
+        else
+            return [];
     }
      public function minianb(int $i):string{
-        if ($i>9)
-            return "Il y'a Mynian";
-        else
+        if ($i<9)
             return "Il n'y a pas Mynian";
+        else
+            return '';
      }
 
 }
