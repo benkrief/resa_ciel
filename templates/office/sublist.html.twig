@@ -12,74 +12,74 @@
 
                             {% for key,nb in offices %}
 
-                            <table class="table table-hover" id="basicTable" style="background: whitesmoke">
-                            <thead>
-                            <tr>
-                                <th style="width:12%"><label>Office</label></th>
-                                <th style="width:12%"><label>Heure</label></th>
-                                <th style="width:12%"><label>Paracha</label></th>
-                                <th style="width:12%"><label>Lieu</label></th>
-                                <th style="width:12%"><label>Date</label></th>
-                                <th style="width:12%"><label>Nom</label></th>
-                                <th style="width:12%"><label>Prénom</label></th>
-                                <th style="width:12%"><label>Supprimer</label></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for id,off in subs %}
-                                {% if id==key %}
-                                    {% for c,i in off %}
-                                        <tr style="font-size: larger">
-                                            <td class="v-align-middle" style="text-transform: capitalize">
-                                                <label>
-                                                    {{ nb.title }}
-                                                </label>
-                                            </td>
-                                            <td class="v-align-middle">
-                                                <label>
-                                                    {{ nb.hour? nb.hour|date('G:i') : ''    }}
-                                                </label>
-                                            </td>
-                                            <td class="v-align-middle" style="text-transform: capitalize">
-                                                <label>
-                                                    {{ nb.paracha }}
-                                                </label>
-                                            </td>
-                                            <td class="v-align-middle" style="text-transform: capitalize">
-                                                <label>
-                                                    {{ nb.lieu }}
-                                                </label>
-                                            </td>
-                                            <td class="v-align-middle" style="text-transform: capitalize">
-                                                <label>
-                                                    {% for cle,valeur in date %}{% if cle==key%} {{ valeur }} {% endif %}{% endfor %}
-                                                </label>
-                                            </td>
-                                            <td class="v-align-middle" style="text-transform: capitalize">
-                                                <label>
-                                                    {{ i.nom }}
-                                                </label>
-                                            </td>
-                                            <td class="v-align-middle" style="text-transform: capitalize">
-                                                <label>
-                                                    {{ i.prenom }}
-                                                </label>
-                                            </td>
-                                            <td class="v-align-middle">
-                                                <a style="opacity: inherit" href="{{ path('office_subremove', {'idOffice':key,'idSub':c,'admin':admin }) }}">
-                                                    ❌
-                                                </a>
-                                            </td>
-                                        </tr>
+                                <table class="table table-hover" id="basicTable" style="background: whitesmoke">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:12%"><label>Office</label></th>
+                                        <th style="width:12%"><label>Heure</label></th>
+                                        <th style="width:12%"><label>Paracha</label></th>
+                                        <th style="width:12%"><label>Lieu</label></th>
+                                        <th style="width:12%"><label>Date</label></th>
+                                        <th style="width:12%"><label>Nom</label></th>
+                                        <th style="width:12%"><label>Prénom</label></th>
+                                        <th style="width:12%"><label>Supprimer</label></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for id,off in subs %}
+                                        {% if id==key %}
+                                            {% for c,i in off %}
+                                                <tr style="font-size: larger">
+                                                    <td class="v-align-middle" style="text-transform: capitalize">
+                                                        <label>
+                                                            {{ nb.title }}
+                                                        </label>
+                                                    </td>
+                                                    <td class="v-align-middle">
+                                                        <label>
+                                                            {{ nb.hour? nb.hour|date('G:i') : ''    }}
+                                                        </label>
+                                                    </td>
+                                                    <td class="v-align-middle" style="text-transform: capitalize">
+                                                        <label>
+                                                            {{ nb.paracha }}
+                                                        </label>
+                                                    </td>
+                                                    <td class="v-align-middle" style="text-transform: capitalize">
+                                                        <label>
+                                                            {{ nb.lieu }}
+                                                        </label>
+                                                    </td>
+                                                    <td class="v-align-middle" style="text-transform: capitalize">
+                                                        <label>
+                                                            {% for cle,valeur in date %}{% if cle==key%} {{ valeur }} {% endif %}{% endfor %}
+                                                        </label>
+                                                    </td>
+                                                    <td class="v-align-middle" style="text-transform: capitalize">
+                                                        <label>
+                                                            {{ i.nom }}
+                                                        </label>
+                                                    </td>
+                                                    <td class="v-align-middle" style="text-transform: capitalize">
+                                                        <label>
+                                                            {{ i.prenom }}
+                                                        </label>
+                                                    </td>
+                                                    <td class="v-align-middle">
+                                                        <a style="opacity: inherit" href="{{ path('office_subremove', {'idOffice':key,'idSub':i.id,'admin':admin }) }}">
+                                                            ❌
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% endif %}
                                     {% endfor %}
-                                {% endif %}
-                            {% endfor %}
-                            </tbody>
-                            </table>
-                          {% else %}
-                            <tr>
-                                <td class="v-align-middle" colspan="6">Pas de reservation séléctionée</td>
-                            </tr>
+                                    </tbody>
+                                </table>
+                            {% else %}
+                                <tr>
+                                    <td class="v-align-middle" colspan="6">Pas de reservation séléctionée</td>
+                                </tr>
 
                             {% endfor %}
 
