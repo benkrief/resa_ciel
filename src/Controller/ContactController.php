@@ -11,7 +11,7 @@ namespace App\Controller;
 
 class ContactController
 {
-    private const FROM_ADDRESS = "resaciel26@gmail.com";
+    private const FROM_ADDRESS = "admin@resaciel.eu";
 
     private MailerInterface $mailer;
     private DateTime $dateTime;
