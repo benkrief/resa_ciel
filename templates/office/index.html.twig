@@ -69,7 +69,7 @@
                                                 <td class="v-align-middle"><label class="no-padding no-margin">
                                                         {% for cle,valeur in dateo %}{% if cle==office.id%} {{ valeur }} {% endif %}{% endfor %}
                                                     </label></td>
-                                                <td class="v-align-middle">{{ office.hour? office.hour|date('G:i') : ''   }}</td>
+                                                <td class="v-align-middle">{{ office.hour? office.hour|date('H:i') : ''   }}</td>
                                                 <td class="v-align-middle">{{ office.paracha }}</td>
                                                 <td class="v-align-middle">{{ office.lieu }}</td>
                                                 <td class="v-align-middle">{{ office.title }}</td>
