@@ -40,6 +40,21 @@ class SubRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findbyName(string $name, string $fn,string $email):?array
+    {
+        return $this->createQueryBuilder('s')
+            ->select('Identity(s.idOffice)')
+            ->where('s.nom=:name')
+            ->andWhere('s.prenom=:fn')
+            ->andWhere('s.email=:email')
+            ->setParameter(':name',$name)
+            ->setParameter(':fn',$fn)
+            ->setParameter(':email',$email)
+            ->orderBy('Identity(s.idOffice)')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Sub[] Returns an array of Sub objects
     //  */

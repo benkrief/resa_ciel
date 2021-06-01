@@ -1,19 +1,29 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}{{ parent() }} - Confirmation d'inscription {% endblock %}
+{% block title %} Confirmation d'inscription {% endblock %}
 
 {% block body %}
     <div class="valid">
         <h1 style="text-transform: capitalize">
-            Bonjour {{ sub.prenom }} {{ sub.nom }}
+            Bonjour {{ prenom }} {{ nom }}
         </h1>
         <br>
         <p>
-            Votre inscription pour l'office de <label style="text-transform: capitalize"> {{ office.title }} a {{ office.lieu}}</label> a bien été prise en compte.
+            Voici votre inscription :
             <br>
-            Merci de venir à {{ office.hour? office.hour|date('G:i') : ''   }} et de respecter les règles sanitaires 😷
+            <ul>
+            {% for c,value in sub %}
+                <li>
+                    {% for key,off in office %}
+                       {% if key==value%} {{ off.title}} {{ off.date}} {{ off.hour? off.hour|date('H:i') : ''    }}  {% endif %}
+                    {% endfor %}
+                </li>
+            {% endfor %}
+            </ul>
+            <br>
+            Merci de venir à l'heure et de respecter les règles sanitaires 😷
             <br>
             A bientot 👋
+
         </p>
     </div>
+
 {% endblock %}
