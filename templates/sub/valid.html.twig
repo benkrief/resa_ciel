@@ -4,36 +4,36 @@
 
 {% block body %}
     {% if valid %}
-            <div class="alert-success" style="margin-left: auto;margin-right: auto; border: 2px groove; border-radius: 16px; padding: 5px">
-                <div class="pgn-message">
+        <div class="alert-success" style="margin-left: auto;margin-right: auto; border: 2px groove; border-radius: 16px; padding: 5px">
+            <div class="pgn-message">
 
-                        <p>
-                            Votre inscription est maintenant validée.
-                            <br>
-                            Vous devriez avoir reçu une confirmation par mail.
-                            <br>
-                            A bientot 👋
-                        </p>
-                </div>
+                <p>
+                    Votre inscription est maintenant validée.
+                    <br>
+                    Vous devriez avoir reçu une confirmation par mail.
+                    <br>
+                    A bientot 👋
+                </p>
             </div>
-                    {% else %}
-            <div class="alert-danger" style="margin-left: auto;margin-right: auto; border: 2px groove; border-radius: 16px; padding: 5px">
-                 <div class="pgn-message">
-                        <p>
-                            Votre inscription a recontré un petit soucis.
-                            <br>
-                            Nous vous conseillons de bien vouloir recommencer => <a href="{{ path('office_index') }}" style="font-size: x-large; color: #0a66b7"> Les Offices</a>.
-                            <br>
-                            A bientot 👋
-                        </p>
-                 </div>
+        </div>
+    {% else %}
+        <div class="alert-danger" style="margin-left: auto;margin-right: auto; border: 2px groove; border-radius: 16px; padding: 5px">
+            <div class="pgn-message">
+                <p>
+                    Votre inscription a recontré un petit soucis.
+                    <br>
+                    Nous vous conseillons de bien vouloir recommencer ou de contacter Benjamin.
+                    <br>
+                    A bientot 👋
+                </p>
             </div>
+        </div>
     {% endif %}
-                     <button class="btn btn-outline-primary" style="font-size: large; position: relative;margin: auto;margin-top: 10px" >
-                         <a style="font-size: medium; opacity: inherit" href="{{ path('office_index') }}">
-                             Revenir aux offices
-                         </a>
-                     </button>
+    <button class="btn btn-outline-primary" style="font-size: large; position: relative;margin: auto;margin-top: 10px" >
+        <a style="font-size: medium; opacity: inherit" href="{{ path('office_index') }}">
+            Revenir aux offices
+        </a>
+    </button>
 
 {% endblock %}
 
