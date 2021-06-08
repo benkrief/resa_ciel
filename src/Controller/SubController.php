@@ -64,21 +64,25 @@ class SubController extends AbstractController
      */
     public function confirm():Response
     {
-
+        $valid=true;
         $choice =$this->session->get("subs");
         foreach ($choice as $key=>$value) {
             for ($j=1;$j<$value+1;$j++){
                 $office=$this->officeRepo->find($key);
+                    if(($office->getMaxSub()-$this->subRepo->list($office->getId()))>0){
+                        $sub = new Sub();
 
-                $sub =new Sub();
+                        $sub->setIdOffice($office);
+                        $sub->setNom($_POST["nom"]);
+                        $sub->setPrenom($_POST["prenom"]);
+                        $sub->setEmail($_POST["email"]);
 
-                $sub->setIdOffice($office);
-                $sub->setNom($_POST["nom"]);
-                $sub->setPrenom($_POST["prenom"]);
-                $sub->setEmail($_POST["email"]);
-                $this->em->persist($sub);
-                $this->em->flush();
 
+                        $this->em->persist($sub);
+                        $this->em->flush();
+
+                    }
+                    else{$valid=false;}
             }
         }
 
@@ -96,15 +100,16 @@ class SubController extends AbstractController
                 $list[$i++]=$o;
             }
         }
+        if ($valid) {
+            $this->contactController->sendEmail($_POST["email"], [
+                "prenom" => $_POST["prenom"],
+                "nom" => $_POST["nom"],
+                "sub" => $list,
+                "office" => $office,
+            ]);
+        }
 
-        $this->contactController->sendEmail($_POST["email"],[
-            "prenom"=>$_POST["prenom"],
-            "nom"=>$_POST["nom"],
-            "sub"=>$list,
-            "office"=>$office,
-        ]);
-
-        return $this->redirectToRoute('valid_sub',['valid'=>true]);
+        return $this->redirectToRoute('valid_sub',['valid'=>$valid]);
 
     }
     /**
@@ -136,9 +141,9 @@ class SubController extends AbstractController
     public function valid():Response
     {
         $valid=$_GET["valid"];
-        if ($valid == null)
-            $valid = false;
+        if ($valid){
         $this->session->clear();
+        }
         return $this->render('sub/valid.html.twig',[
             "valid"=>$valid,
         ]);
