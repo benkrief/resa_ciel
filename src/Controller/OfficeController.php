@@ -152,7 +152,7 @@ class OfficeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit/{admin}", name="office_edit", methods={"GET","POST"})
+     * @Route("/edit/{id}/{admin}", name="office_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Office $office, $admin): Response
     {
