@@ -17,12 +17,13 @@
                                     <tr>
                                         <th style="width:12%"><label>Office</label></th>
                                         <th style="width:12%"><label>Heure</label></th>
-                                        <th style="width:12%"><label>Paracha</label></th>
                                         <th style="width:12%"><label>Lieu</label></th>
                                         <th style="width:12%"><label>Date</label></th>
                                         <th style="width:12%"><label>Nom</label></th>
                                         <th style="width:12%"><label>Prénom</label></th>
                                         <th style="width:12%"><label>Supprimer</label></th>
+
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -38,11 +39,6 @@
                                                     <td class="v-align-middle">
                                                         <label>
                                                             {{ nb.hour? nb.hour|date('G:i') : ''    }}
-                                                        </label>
-                                                    </td>
-                                                    <td class="v-align-middle" style="text-transform: capitalize">
-                                                        <label>
-                                                            {{ nb.paracha }}
                                                         </label>
                                                     </td>
                                                     <td class="v-align-middle" style="text-transform: capitalize">
@@ -70,6 +66,13 @@
                                                             ❌
                                                         </a>
                                                     </td>
+                                                    {% if nb.cmt %}
+                                                    <td class="v-align-middle">
+                                                        <a style="opacity: inherit" href="{{ path('sub_delete', {'id':i.id,'admin':admin }) }}" onclick="return(confirm('Supprimer {{ i.nom }} {{ i.prenom }} ? '))">
+                                                            {{ i.comment }}
+                                                        </a>
+                                                    </td>
+                                                    {% endif %}
                                                 </tr>
                                             {% endfor %}
                                         {% endif %}

@@ -38,6 +38,11 @@ class Sub
      */
     private $idOffice;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $comment;
+
 
 
 
@@ -90,6 +95,18 @@ class Sub
     public function setIdOffice(?Office $idOffice): self
     {
         $this->idOffice = $idOffice;
+
+        return $this;
+    }
+
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?string $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }

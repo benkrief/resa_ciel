@@ -22,7 +22,7 @@ class SubRepository extends ServiceEntityRepository
     public function select(int $id): ?array
     {
         return $this->createQueryBuilder('s')
-            ->select('s.id','s.nom','s.prenom')
+            ->select('s.id','s.nom','s.prenom','s.comment')
             ->where('s.idOffice = :id')
             ->setParameter(':id', $id)
             ->orderBy('s.nom')

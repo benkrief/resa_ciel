@@ -45,7 +45,7 @@ class SubController extends AbstractController
             foreach ($this->officeRepo->findAll() as $off){
                 $d["jour"]=date_format($off->getDate(),'N');
                 if ($d["jour"]==1){$j="Lundi";}elseif($d["jour"]==2){$j="Mardi";}elseif($d["jour"]==3){$j="Mercredi";}elseif($d["jour"]==4){$j="Jeudi";}elseif($d["jour"]==5){$j="Vendredi";}elseif($d["jour"]==6){$j="Samedi";}else{$j="Dimanche";}
-                $office[$off->getId()]=array("title"=>$off->getTitle(),"lieu"=>$off->getLieu(),"date"=>$j,"hour"=>$off->getHour());
+                $office[$off->getId()]=array("title"=>$off->getTitle(),"lieu"=>$off->getLieu(),"date"=>$j,"hour"=>$off->getHour(),"comment"=>$off->getComment());
             }
 
         }
@@ -76,6 +76,7 @@ class SubController extends AbstractController
                         $sub->setNom($_POST["nom"]);
                         $sub->setPrenom($_POST["prenom"]);
                         $sub->setEmail($_POST["email"]);
+                        $sub->setComment($_POST["comment"]);
 
 
                         $this->em->persist($sub);

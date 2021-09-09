@@ -57,6 +57,11 @@ class Office
      */
     private $paracha;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $comment;
+
     public function __construct()
     {
         $this->subs = new ArrayCollection();
@@ -177,6 +182,18 @@ class Office
     public function setParacha(string $paracha): self
     {
         $this->paracha = $paracha;
+
+        return $this;
+    }
+
+    public function getComment(): ?bool
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?bool $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }
