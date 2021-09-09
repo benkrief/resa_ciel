@@ -42,11 +42,6 @@
                                                     </td>
                                                     <td class="v-align-middle" style="text-transform: capitalize">
                                                         <label>
-                                                            {{ nb.paracha }}
-                                                        </label>
-                                                    </td>
-                                                    <td class="v-align-middle" style="text-transform: capitalize">
-                                                        <label>
                                                             {{ nb.lieu }}
                                                         </label>
                                                     </td>
@@ -70,6 +65,13 @@
                                                             ❌
                                                         </a>
                                                     </td>
+                                                    {% if nb.cmt %}
+                                                        <td class="v-align-middle">
+                                                            <a style="opacity: inherit" href="{{ path('sub_delete', {'id':i.id,'admin':admin }) }}" onclick="return(confirm('Supprimer {{ i.nom }} {{ i.prenom }} ? '))">
+                                                                {{ i.comment }}
+                                                            </a>
+                                                        </td>
+                                                    {% endif %}
                                                 </tr>
                                             {% endfor %}
                                         {% endif %}

@@ -23,6 +23,7 @@ class OfficeType extends AbstractType
             ->add('paracha')
             ->add('lieu')
             ->add('maxSub')
+            ->add('comment')
         ;
     }
 
